@@ -18,7 +18,7 @@ public class UserController {
 
 	private ArrayList<User> users = new ArrayList<User>();
 	
-	@GetMapping("/users")
+	@GetMapping("/user")
 	public ResponseEntity<?> getUsers() {
 		return ResponseEntity.status(HttpStatus.OK).body(users);
 	}

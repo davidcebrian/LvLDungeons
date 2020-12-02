@@ -37,7 +37,7 @@ _Todo lo que necesitas para este proyecto:_
     nodejs -v
     ```
 
-- TypeScript --> [Instalacion](typescriptlang.org/download)
+- TypeScript --> [Instalacion](typescriptlang.org/download)****
 
     ```
     npm install -g typescript
@@ -85,8 +85,8 @@ _Agrega notas adicionales sobre como hacer deploy_
 
 ## Construido con 🛠️
 
-| [Angular](https://angular.io/docs)| [Spring](https://spring.io/why-spring)| [Spring --> Spring-Tools](https://spring.io/tools) | [Docker](https://www.docker.com/) | [MySQL Workbench](https://www.mysql.com/products/workbench/) | [Visual Studio Code](https://code.visualstudio.com/)
-| -- | :--- | -- | -- | -- | -- | -- |
+| [Angular](https://angular.io/docs)| [Spring](https://spring.io/why-spring)| [Spring --> Spring-Tools](https://spring.io/tools) | [Docker](https://www.docker.com/) | [MySQL Workbench](https://www.mysql.com/products/workbench/) | [Visual Studio Code](https://code.visualstudio.com/)|
+| -- | -- | -- | -- | -- | -- | -- |
 | El framework web SPA. | Framework de desarrollo. | Herramienta para Spring. | Contenedor para la base de datos. | Para el manejo de la base de datos. | Editor utilizado. |
 
 ## Autores ✒️

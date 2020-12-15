@@ -108,7 +108,7 @@ public class Personaje implements Serializable {
 	public boolean isVivo() {
 		return vivo;
 	}
-
+	
 	public void setVivo(boolean vivo) {
 		this.vivo = vivo;
 	}

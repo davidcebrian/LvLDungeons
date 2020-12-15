@@ -25,7 +25,6 @@ public class User implements Serializable{
 	private int edad;
 	
 	@OneToOne(mappedBy = "usuario",cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
 	private Personaje personaje;
 	
 	public User() {
@@ -96,9 +95,6 @@ public class User implements Serializable{
 
 	public Personaje getPersonaje() {
 		return personaje;
-	}
-	
-	
-	
+	}	
 	
 }

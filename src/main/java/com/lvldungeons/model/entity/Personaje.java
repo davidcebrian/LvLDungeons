@@ -42,7 +42,6 @@ public class Personaje implements Serializable {
 	private boolean vivo;
 	
 	@OneToOne
-	@MapsId
 	@JoinColumn(name = "idUsuario")
 	private User usuario;
 	

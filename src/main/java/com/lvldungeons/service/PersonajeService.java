@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lvldungeons.model.entity.Personaje;
-import com.lvldungeons.model.entity.User;
 import com.lvldungeons.model.repo.PersonajeRepository;
 
 @Service
@@ -28,7 +27,8 @@ public class PersonajeService {
 			
 		//Get de un user por id
 			public Personaje getEntityById(Long id) {
-				return persoRepo.findById(id).get();
+				Personaje p = persoRepo.findById(id).get();
+				return p;
 			}
 			
 			//Crear un nuevo user

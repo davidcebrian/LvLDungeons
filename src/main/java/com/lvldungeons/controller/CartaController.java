@@ -26,48 +26,33 @@ public class CartaController {
 	@GetMapping("{id}")
 	public ResponseEntity<?> getCartas(@PathVariable long Id) {
 		ResponseEntity<?> response;
-		if (cartaService.getEntityById(Id) != null) {
-			response = ResponseEntity.status(HttpStatus.OK).body(cartaService.getEntityById(Id));
-		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No se ha encontrado el usuario");
-		}
+		response = ResponseEntity.status(HttpStatus.OK).body(cartaService.getEntityById(Id));
+
 		return response;
 	}
 	
 	@PostMapping("")
 	public ResponseEntity<?> addCarta(@RequestBody Carta carta) {
 		ResponseEntity<?> response;
+		response = ResponseEntity.status(HttpStatus.OK).body(cartaService.saveEntity(carta));
 
-		if (cartaService.getEntityById(carta.getIdCarta()) == null) {
-			response = ResponseEntity.status(HttpStatus.OK).body(cartaService.saveEntity(carta));
-		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
-		}
 		return response;
 	}
 	
 	@PutMapping("{id}")
 	public ResponseEntity<?> updateCarta(@PathVariable long id, @RequestBody Carta carta) {
 		ResponseEntity<?> response;
+		response = ResponseEntity.status(HttpStatus.OK).body(cartaService.updateEntity(id, carta));
 
-		if (cartaService.getEntityById(id) == null) {
-			response = ResponseEntity.status(HttpStatus.OK).body(cartaService.updateEntity(id, carta));
-		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
-		}
 		return response;
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> deleteCarta(@PathVariable Long id) {
 		ResponseEntity<?> response;
+		cartaService.deleteEntity(id);
+		response = ResponseEntity.status(HttpStatus.OK).body("Se ha eliminado la entidad: " + id.toString());
 
-		if (cartaService.getEntityById(id) != null) {
-			cartaService.deleteEntity(id);
-			response = ResponseEntity.status(HttpStatus.OK).body("Se ha eliminado la entidad: " + id.toString());
-		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No existe el usuario");
-		}
 		return response;
 	}
 }

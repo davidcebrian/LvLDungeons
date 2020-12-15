@@ -26,18 +26,14 @@ public class UserController {
 	@GetMapping("{id}")
 	public ResponseEntity<?> getUsers(@PathVariable long Id) {
 		ResponseEntity<?> response;
-		if (userService.getEntityById(Id) != null) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.getEntityById(Id));
-		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No se ha encontrado el usuario");
-		}
+		response = ResponseEntity.status(HttpStatus.OK).body(userService.getEntityById(Id));
+		
 		return response;
 	}
 	
 	@PostMapping("")
 	public ResponseEntity<?> addUser(@RequestBody User user) {
 		ResponseEntity<?> response;
-
 		response = ResponseEntity.status(HttpStatus.OK).body(userService.saveEntity(user));
 
 		return response;
@@ -46,25 +42,17 @@ public class UserController {
 	@PutMapping("{id}")
 	public ResponseEntity<?> updateUser(@PathVariable long id, @RequestBody User user) {
 		ResponseEntity<?> response;
-
-		if (userService.getEntityById(id) == null) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.updateEntity(id, user));
-		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
-		}
+		response = ResponseEntity.status(HttpStatus.OK).body(userService.updateEntity(id, user));
+		
 		return response;
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> deleteUser(@PathVariable Long id) {
 		ResponseEntity<?> response;
-
-		if (userService.getEntityById(id) != null) {
-			userService.deleteEntity(id);
-			response = ResponseEntity.status(HttpStatus.OK).body("Se ha eliminado la entidad: " + id.toString());
-		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No existe el usuario");
-		}
+		userService.deleteEntity(id);
+		response = ResponseEntity.status(HttpStatus.OK).body("Se ha eliminado la entidad: " + id.toString());
+		
 		return response;
 	}
 }

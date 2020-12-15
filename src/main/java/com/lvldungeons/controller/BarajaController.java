@@ -25,48 +25,33 @@ public class BarajaController {
 	@GetMapping("{id}")
 	public ResponseEntity<?> getBarajas(@PathVariable long Id) {
 		ResponseEntity<?> response;
-		if (barajaService.getEntityById(Id) != null) {
-			response = ResponseEntity.status(HttpStatus.OK).body(barajaService.getEntityById(Id));
-		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No se ha encontrado el usuario");
-		}
+		response = ResponseEntity.status(HttpStatus.OK).body(barajaService.getEntityById(Id));
+		
 		return response;
 	}
 	
 	@PostMapping("")
 	public ResponseEntity<?> addBaraja(@RequestBody Baraja baraja) {
 		ResponseEntity<?> response;
-
-		if (barajaService.getEntityById(baraja.getIdBaraja()) == null) {
-			response = ResponseEntity.status(HttpStatus.OK).body(barajaService.saveEntity(baraja));
-		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
-		}
+		response = ResponseEntity.status(HttpStatus.OK).body(barajaService.saveEntity(baraja));
+		
 		return response;
 	}
 	
 	@PutMapping("{id}")
 	public ResponseEntity<?> updateBaraja(@PathVariable long id, @RequestBody Baraja baraja) {
 		ResponseEntity<?> response;
+		response = ResponseEntity.status(HttpStatus.OK).body(barajaService.updateEntity(id, baraja));
 
-		if (barajaService.getEntityById(id) == null) {
-			response = ResponseEntity.status(HttpStatus.OK).body(barajaService.updateEntity(id, baraja));
-		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
-		}
 		return response;
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> deleteBaraja(@PathVariable Long id) {
 		ResponseEntity<?> response;
+		barajaService.deleteEntity(id);
+		response = ResponseEntity.status(HttpStatus.OK).body("Se ha eliminado la entidad: " + id.toString());
 
-		if (barajaService.getEntityById(id) != null) {
-			barajaService.deleteEntity(id);
-			response = ResponseEntity.status(HttpStatus.OK).body("Se ha eliminado la entidad: " + id.toString());
-		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No existe el usuario");
-		}
 		return response;
 	}
 }

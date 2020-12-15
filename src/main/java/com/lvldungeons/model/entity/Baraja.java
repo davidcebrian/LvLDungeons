@@ -29,7 +29,6 @@ public class Baraja implements Serializable{
 	private tipoBaraja tipobaraja;
 	
 	@OneToOne
-	@MapsId
 	@JoinColumn(name = "idPersonaje")
 	private Personaje personaje;
 	

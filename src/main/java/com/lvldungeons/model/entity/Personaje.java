@@ -34,7 +34,6 @@ public class Personaje implements Serializable {
 	private int energia;
 	
 	@OneToOne(mappedBy = "personaje", cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
 	private Baraja mano;
 	
 	@OneToMany(mappedBy = "personaje")
@@ -47,7 +46,6 @@ public class Personaje implements Serializable {
 	
 	public Personaje() {
 		super();
-		mano = new Baraja();
 		equipamiento = new ArrayList<Carta>();
 	}
 	
@@ -60,7 +58,6 @@ public class Personaje implements Serializable {
 		this.daño = VIDA_INI;
 		this.energia = MAX_ENER;
 		this.vivo = true;
-		this.mano = mano;
 		equipamiento = new ArrayList<Carta>();
 	}
 

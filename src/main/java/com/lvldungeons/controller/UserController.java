@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lvldungeons.entity.User;
-import com.lvldungeons.repository.UserRepository;
+import com.lvldungeons.model.entity.User;
+import com.lvldungeons.model.repo.UserRepository;
 
 
 @RestController

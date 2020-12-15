@@ -7,10 +7,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-public class CpMunchkinNuevaCarpetaApplication {
+public class LvLDungeonsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CpMunchkinNuevaCarpetaApplication.class, args);
+		SpringApplication.run(LvLDungeonsApplication.class, args);
 	}
 	@Bean
     public WebMvcConfigurer corsConfigurer() {

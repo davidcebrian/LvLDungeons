@@ -30,6 +30,7 @@ public class User implements Serializable{
 	
 	public User() {
 		super();
+		this.personaje = new Personaje();
 	}
 	
 	public User(String nombre, String email, String nick, String pass, int edad, Personaje personaje) {

@@ -13,6 +13,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lvldungeons.model.enumerados.tipoBaraja;
 
 @Entity

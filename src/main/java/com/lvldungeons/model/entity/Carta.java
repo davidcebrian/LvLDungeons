@@ -35,6 +35,8 @@ public class Carta implements Serializable{
 	
 	public Carta(){
 		super();
+		this.baraja = new Baraja();
+		this.personaje = new Personaje();
 	}
 
 	public Carta(String nombre, String efecto, int daño, tipoCarta tipocarta, Blob diseño) {
@@ -44,6 +46,8 @@ public class Carta implements Serializable{
 		this.daño = daño;
 		this.tipocarta = tipocarta;
 		this.diseño = diseño;
+		this.baraja = new Baraja();
+		this.personaje = new Personaje();
 	}
 	
 	public Baraja getBaraja() {

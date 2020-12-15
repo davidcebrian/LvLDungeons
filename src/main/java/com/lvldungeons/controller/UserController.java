@@ -38,11 +38,8 @@ public class UserController {
 	public ResponseEntity<?> addUser(@RequestBody User user) {
 		ResponseEntity<?> response;
 
-		if (userService.getEntityById(user.getIdUsuario()) == null) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.saveEntity(user));
-		} else {
-			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
-		}
+		response = ResponseEntity.status(HttpStatus.OK).body(userService.saveEntity(user));
+
 		return response;
 	}
 	

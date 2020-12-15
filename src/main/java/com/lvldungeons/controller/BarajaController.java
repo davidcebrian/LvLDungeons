@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lvldungeons.model.entity.Baraja;
+import com.lvldungeons.service.BarajaService;
 
 @RestController
 @RequestMapping(path = "baraja")
@@ -36,7 +37,7 @@ public class BarajaController {
 	public ResponseEntity<?> addBaraja(@RequestBody Baraja baraja) {
 		ResponseEntity<?> response;
 
-		if (barajaService.getEntityById(baraja.getIdUsuario()) == null) {
+		if (barajaService.getEntityById(baraja.getIdBaraja()) == null) {
 			response = ResponseEntity.status(HttpStatus.OK).body(barajaService.saveEntity(baraja));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");

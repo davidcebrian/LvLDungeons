@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lvldungeons.model.entity.Carta;
+import com.lvldungeons.service.CartaService;
 
 
 @RestController
@@ -37,7 +38,7 @@ public class CartaController {
 	public ResponseEntity<?> addCarta(@RequestBody Carta carta) {
 		ResponseEntity<?> response;
 
-		if (cartaService.getEntityById(carta.getIdUsuario()) == null) {
+		if (cartaService.getEntityById(carta.getIdCarta()) == null) {
 			response = ResponseEntity.status(HttpStatus.OK).body(cartaService.saveEntity(carta));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");

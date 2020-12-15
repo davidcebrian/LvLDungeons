@@ -38,7 +38,7 @@ public class PersonajeController {
 	public ResponseEntity<?> addPersonaje(@RequestBody Personaje personaje) {
 		ResponseEntity<?> response;
 
-		if (personajeService.getEntityById(personaje.getIdUsuario()) == null) {
+		if (personajeService.getEntityById(personaje.getIdPersonaje()) == null) {
 			response = ResponseEntity.status(HttpStatus.OK).body(personajeService.saveEntity(personaje));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");

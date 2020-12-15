@@ -23,9 +23,9 @@ public class BarajaController {
 	private BarajaService barajaService; 
 	
 	@GetMapping("{id}")
-	public ResponseEntity<?> getBarajas(@PathVariable long Id) {
+	public ResponseEntity<?> getBarajas(@PathVariable Long id) {
 		ResponseEntity<?> response;
-		response = ResponseEntity.status(HttpStatus.OK).body(barajaService.getEntityById(Id));
+		response = ResponseEntity.status(HttpStatus.OK).body(barajaService.getEntityById(id));
 		
 		return response;
 	}
@@ -39,7 +39,7 @@ public class BarajaController {
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<?> updateBaraja(@PathVariable long id, @RequestBody Baraja baraja) {
+	public ResponseEntity<?> updateBaraja(@PathVariable Long id, @RequestBody Baraja baraja) {
 		ResponseEntity<?> response;
 		response = ResponseEntity.status(HttpStatus.OK).body(barajaService.updateEntity(id, baraja));
 

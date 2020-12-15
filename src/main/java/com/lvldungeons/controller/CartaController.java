@@ -24,9 +24,9 @@ public class CartaController {
 	private CartaService cartaService; 
 	
 	@GetMapping("{id}")
-	public ResponseEntity<?> getCartas(@PathVariable long Id) {
+	public ResponseEntity<?> getCartas(@PathVariable Long id) {
 		ResponseEntity<?> response;
-		response = ResponseEntity.status(HttpStatus.OK).body(cartaService.getEntityById(Id));
+		response = ResponseEntity.status(HttpStatus.OK).body(cartaService.getEntityById(id));
 
 		return response;
 	}
@@ -40,7 +40,7 @@ public class CartaController {
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<?> updateCarta(@PathVariable long id, @RequestBody Carta carta) {
+	public ResponseEntity<?> updateCarta(@PathVariable Long id, @RequestBody Carta carta) {
 		ResponseEntity<?> response;
 		response = ResponseEntity.status(HttpStatus.OK).body(cartaService.updateEntity(id, carta));
 

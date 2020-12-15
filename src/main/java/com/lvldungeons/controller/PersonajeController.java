@@ -23,9 +23,9 @@ public class PersonajeController {
 	private PersonajeService personajeService; 
 	
 	@GetMapping("{id}")
-	public ResponseEntity<?> getPersonajes(@PathVariable long Id) {
+	public ResponseEntity<?> getPersonajes(@PathVariable Long id) {
 		ResponseEntity<?> response;
-		response = ResponseEntity.status(HttpStatus.OK).body(personajeService.getEntityById(Id));
+		response = ResponseEntity.status(HttpStatus.OK).body(personajeService.getEntityById(id));
 		
 		return response;
 	}
@@ -39,7 +39,7 @@ public class PersonajeController {
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<?> updatePersonaje(@PathVariable long id, @RequestBody Personaje personaje) {
+	public ResponseEntity<?> updatePersonaje(@PathVariable Long id, @RequestBody Personaje personaje) {
 		ResponseEntity<?> response;
 		response = ResponseEntity.status(HttpStatus.OK).body(personajeService.updateEntity(id, personaje));
 		

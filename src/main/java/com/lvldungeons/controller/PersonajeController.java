@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lvldungeons.model.entity.Personaje;
+import com.lvldungeons.model.entity.Personaje;
+import com.lvldungeons.service.PersonajeService;
 
 @RestController
 @RequestMapping(path = "personaje")
@@ -20,12 +22,12 @@ public class PersonajeController {
 
 	@Autowired 
 	private PersonajeService personajeService; 
-
+	
 	@GetMapping("{id}")
-	public ResponseEntity<?> getpersonajes(@PathVariable long Id) {
-		ResponseEntity response;
-		if (personajeService.existsById(Id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(personajeService.findById(Id));
+	public ResponseEntity<?> getPersonajes(@PathVariable long Id) {
+		ResponseEntity<?> response;
+		if (personajeService.getEntityById(Id) != null) {
+			response = ResponseEntity.status(HttpStatus.OK).body(personajeService.getEntityById(Id));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No se ha encontrado el usuario");
 		}
@@ -33,11 +35,11 @@ public class PersonajeController {
 	}
 	
 	@PostMapping("")
-	public ResponseEntity<?> addpersonaje(@RequestBody Personaje personaje) {
-		ResponseEntity response;
+	public ResponseEntity<?> addPersonaje(@RequestBody Personaje personaje) {
+		ResponseEntity<?> response;
 
-		if (!personajeService.existsById(personaje.getIdUsuario())) {
-			response = ResponseEntity.status(HttpStatus.OK).body(personajeService.save(personaje));
+		if (personajeService.getEntityById(personaje.getIdUsuario()) == null) {
+			response = ResponseEntity.status(HttpStatus.OK).body(personajeService.saveEntity(personaje));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
 		}
@@ -45,11 +47,11 @@ public class PersonajeController {
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<?> updatepersonaje(@PathVariable long id, @RequestBody Personaje personaje) {
-		ResponseEntity response;
+	public ResponseEntity<?> updatePersonaje(@PathVariable long id, @RequestBody Personaje personaje) {
+		ResponseEntity<?> response;
 
-		if (personajeService.existsById(id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(personajeService.save(personaje));
+		if (personajeService.getEntityById(id) == null) {
+			response = ResponseEntity.status(HttpStatus.OK).body(personajeService.updateEntity(id, personaje));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
 		}
@@ -57,11 +59,12 @@ public class PersonajeController {
 	}
 	
 	@DeleteMapping("{id}")
-	public ResponseEntity<?> deletepersonaje(@PathVariable long id) {
-		ResponseEntity response;
+	public ResponseEntity<?> deletePersonaje(@PathVariable Long id) {
+		ResponseEntity<?> response;
 
-		if (personajeService.existsById(id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(personajeService.delete(personaje));
+		if (personajeService.getEntityById(id) != null) {
+			personajeService.deleteEntity(id);
+			response = ResponseEntity.status(HttpStatus.OK).body("Se ha eliminado la entidad: " + id.toString());
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No existe el usuario");
 		}

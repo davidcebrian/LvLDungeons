@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lvldungeons.model.entity.Baraja;
 
-
 @RestController
 @RequestMapping(path = "baraja")
 public class BarajaController {
@@ -22,12 +21,11 @@ public class BarajaController {
 	@Autowired 
 	private BarajaService barajaService; 
 	
-
 	@GetMapping("{id}")
-	public ResponseEntity<?> getbarajas(@PathVariable long Id) {
-		ResponseEntity response;
-		if (barajaService.existsById(Id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(barajaService.findById(Id));
+	public ResponseEntity<?> getBarajas(@PathVariable long Id) {
+		ResponseEntity<?> response;
+		if (barajaService.getEntityById(Id) != null) {
+			response = ResponseEntity.status(HttpStatus.OK).body(barajaService.getEntityById(Id));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No se ha encontrado el usuario");
 		}
@@ -35,11 +33,11 @@ public class BarajaController {
 	}
 	
 	@PostMapping("")
-	public ResponseEntity<?> addbaraja(@RequestBody Baraja baraja) {
-		ResponseEntity response;
+	public ResponseEntity<?> addBaraja(@RequestBody Baraja baraja) {
+		ResponseEntity<?> response;
 
-		if (!barajaService.existsById(baraja.getIdUsuario())) {
-			response = ResponseEntity.status(HttpStatus.OK).body(barajaService.save(baraja));
+		if (barajaService.getEntityById(baraja.getIdUsuario()) == null) {
+			response = ResponseEntity.status(HttpStatus.OK).body(barajaService.saveEntity(baraja));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
 		}
@@ -47,11 +45,11 @@ public class BarajaController {
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<?> updatebaraja(@PathVariable long id, @RequestBody Baraja baraja) {
-		ResponseEntity response;
+	public ResponseEntity<?> updateBaraja(@PathVariable long id, @RequestBody Baraja baraja) {
+		ResponseEntity<?> response;
 
-		if (barajaService.existsById(id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(barajaService.save(baraja));
+		if (barajaService.getEntityById(id) == null) {
+			response = ResponseEntity.status(HttpStatus.OK).body(barajaService.updateEntity(id, baraja));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
 		}
@@ -59,11 +57,12 @@ public class BarajaController {
 	}
 	
 	@DeleteMapping("{id}")
-	public ResponseEntity<?> deletebaraja(@PathVariable long id) {
-		ResponseEntity response;
+	public ResponseEntity<?> deleteBaraja(@PathVariable Long id) {
+		ResponseEntity<?> response;
 
-		if (barajaService.existsById(id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(barajaService.delete(baraja));
+		if (barajaService.getEntityById(id) != null) {
+			barajaService.deleteEntity(id);
+			response = ResponseEntity.status(HttpStatus.OK).body("Se ha eliminado la entidad: " + id.toString());
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No existe el usuario");
 		}

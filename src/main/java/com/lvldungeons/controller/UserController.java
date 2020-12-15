@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lvldungeons.model.entity.User;
+import com.lvldungeons.service.UserService;
 
 
 @RestController
@@ -24,9 +25,9 @@ public class UserController {
 	
 	@GetMapping("{id}")
 	public ResponseEntity<?> getUsers(@PathVariable long Id) {
-		ResponseEntity response;
-		if (userService.existsById(Id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.findById(Id));
+		ResponseEntity<?> response;
+		if (userService.getEntityById(Id) != null) {
+			response = ResponseEntity.status(HttpStatus.OK).body(userService.getEntityById(Id));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No se ha encontrado el usuario");
 		}
@@ -35,10 +36,10 @@ public class UserController {
 	
 	@PostMapping("")
 	public ResponseEntity<?> addUser(@RequestBody User user) {
-		ResponseEntity response;
+		ResponseEntity<?> response;
 
-		if (!userService.existsById(user.getIdUsuario())) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.save(user));
+		if (userService.getEntityById(user.getIdUsuario()) == null) {
+			response = ResponseEntity.status(HttpStatus.OK).body(userService.saveEntity(user));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
 		}
@@ -47,10 +48,10 @@ public class UserController {
 	
 	@PutMapping("{id}")
 	public ResponseEntity<?> updateUser(@PathVariable long id, @RequestBody User user) {
-		ResponseEntity response;
+		ResponseEntity<?> response;
 
-		if (userService.existsById(id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.save(user));
+		if (userService.getEntityById(id) == null) {
+			response = ResponseEntity.status(HttpStatus.OK).body(userService.updateEntity(id, user));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
 		}
@@ -58,11 +59,12 @@ public class UserController {
 	}
 	
 	@DeleteMapping("{id}")
-	public ResponseEntity<?> deleteUser(@PathVariable long id) {
-		ResponseEntity response;
+	public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+		ResponseEntity<?> response;
 
-		if (userService.existsById(id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.delete(user));
+		if (userService.getEntityById(id) != null) {
+			userService.deleteEntity(id);
+			response = ResponseEntity.status(HttpStatus.OK).body("Se ha eliminado la entidad: " + id.toString());
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No existe el usuario");
 		}

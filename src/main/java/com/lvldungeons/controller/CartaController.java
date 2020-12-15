@@ -12,21 +12,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lvldungeons.model.entity.User;
-
+import com.lvldungeons.model.entity.Carta;
 
 @RestController
-@RequestMapping(path = "user")
-public class UserController {
+@RequestMapping(path = "carta")
+public class CartaController {
 
-	@Autowired 
-	private UserService userService; 
 	
+	@Autowired 
+	private CartaService cartaService; 
+	
+
 	@GetMapping("{id}")
-	public ResponseEntity<?> getUsers(@PathVariable long Id) {
+	public ResponseEntity<?> getcartas(@PathVariable long Id) {
 		ResponseEntity response;
-		if (userService.existsById(Id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.findById(Id));
+		if (cartaService.existsById(Id)) {
+			response = ResponseEntity.status(HttpStatus.OK).body(cartaService.findById(Id));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No se ha encontrado el usuario");
 		}
@@ -34,11 +35,11 @@ public class UserController {
 	}
 	
 	@PostMapping("")
-	public ResponseEntity<?> addUser(@RequestBody User user) {
+	public ResponseEntity<?> addcarta(@RequestBody Carta carta) {
 		ResponseEntity response;
 
-		if (!userService.existsById(user.getIdUsuario())) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.save(user));
+		if (!cartaService.existsById(carta.getIdUsuario())) {
+			response = ResponseEntity.status(HttpStatus.OK).body(cartaService.save(carta));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
 		}
@@ -46,11 +47,11 @@ public class UserController {
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<?> updateUser(@PathVariable long id, @RequestBody User user) {
+	public ResponseEntity<?> updatecarta(@PathVariable long id, @RequestBody Carta carta) {
 		ResponseEntity response;
 
-		if (userService.existsById(id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.save(user));
+		if (cartaService.existsById(id)) {
+			response = ResponseEntity.status(HttpStatus.OK).body(cartaService.save(carta));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
 		}
@@ -58,11 +59,11 @@ public class UserController {
 	}
 	
 	@DeleteMapping("{id}")
-	public ResponseEntity<?> deleteUser(@PathVariable long id) {
+	public ResponseEntity<?> deletecarta(@PathVariable long id) {
 		ResponseEntity response;
 
-		if (userService.existsById(id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.delete(user));
+		if (cartaService.existsById(id)) {
+			response = ResponseEntity.status(HttpStatus.OK).body(cartaService.delete(carta));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No existe el usuario");
 		}

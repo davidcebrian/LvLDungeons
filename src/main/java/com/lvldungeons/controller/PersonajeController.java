@@ -12,21 +12,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lvldungeons.model.entity.User;
-
+import com.lvldungeons.model.entity.Personaje;
 
 @RestController
-@RequestMapping(path = "user")
-public class UserController {
+@RequestMapping(path = "personaje")
+public class PersonajeController {
 
 	@Autowired 
-	private UserService userService; 
-	
+	private PersonajeService personajeService; 
+
 	@GetMapping("{id}")
-	public ResponseEntity<?> getUsers(@PathVariable long Id) {
+	public ResponseEntity<?> getpersonajes(@PathVariable long Id) {
 		ResponseEntity response;
-		if (userService.existsById(Id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.findById(Id));
+		if (personajeService.existsById(Id)) {
+			response = ResponseEntity.status(HttpStatus.OK).body(personajeService.findById(Id));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No se ha encontrado el usuario");
 		}
@@ -34,11 +33,11 @@ public class UserController {
 	}
 	
 	@PostMapping("")
-	public ResponseEntity<?> addUser(@RequestBody User user) {
+	public ResponseEntity<?> addpersonaje(@RequestBody Personaje personaje) {
 		ResponseEntity response;
 
-		if (!userService.existsById(user.getIdUsuario())) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.save(user));
+		if (!personajeService.existsById(personaje.getIdUsuario())) {
+			response = ResponseEntity.status(HttpStatus.OK).body(personajeService.save(personaje));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
 		}
@@ -46,11 +45,11 @@ public class UserController {
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<?> updateUser(@PathVariable long id, @RequestBody User user) {
+	public ResponseEntity<?> updatepersonaje(@PathVariable long id, @RequestBody Personaje personaje) {
 		ResponseEntity response;
 
-		if (userService.existsById(id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.save(user));
+		if (personajeService.existsById(id)) {
+			response = ResponseEntity.status(HttpStatus.OK).body(personajeService.save(personaje));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe el usuario");
 		}
@@ -58,11 +57,11 @@ public class UserController {
 	}
 	
 	@DeleteMapping("{id}")
-	public ResponseEntity<?> deleteUser(@PathVariable long id) {
+	public ResponseEntity<?> deletepersonaje(@PathVariable long id) {
 		ResponseEntity response;
 
-		if (userService.existsById(id)) {
-			response = ResponseEntity.status(HttpStatus.OK).body(userService.delete(user));
+		if (personajeService.existsById(id)) {
+			response = ResponseEntity.status(HttpStatus.OK).body(personajeService.delete(personaje));
 		} else {
 			response = ResponseEntity.status(HttpStatus.CONFLICT).body("No existe el usuario");
 		}

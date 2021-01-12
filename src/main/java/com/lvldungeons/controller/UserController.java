@@ -1,5 +1,7 @@
 package com.lvldungeons.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,18 @@ public class UserController {
 		return response;
 	}
 	
+	@GetMapping("autenticado")
+	public ResponseEntity<?> datosAutenticado(HttpServletRequest request){
+		ResponseEntity<?> response = null;
+		User user = userService.datosAutenticado(request);
+		if(request != null && user != null) {
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
+		}else {
+			ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe usuario.");
+		}
+		return response;
+	}
+	
 	@GetMapping("all")
 	public ResponseEntity<?> getAllUsers() {
 		ResponseEntity<?> response;
@@ -60,6 +74,13 @@ public class UserController {
 		ResponseEntity<?> response;
 		response = ResponseEntity.status(HttpStatus.OK).body(userService.updateEntity(id, user));
 		
+		return response;
+	}
+	
+	@PutMapping("")
+	public ResponseEntity<?> updateUser(HttpServletRequest request, @RequestBody User user) {
+		ResponseEntity<?> response;
+		response = ResponseEntity.status(HttpStatus.OK).body(userService.updateEntityAut(request, user));
 		return response;
 	}
 	

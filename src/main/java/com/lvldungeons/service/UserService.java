@@ -25,14 +25,14 @@ public class UserService {
 	
 	
 	//Autenticacion de usuario, devolviendo jwt creado a partir de un usuario.
-		public User autenticaUsuario(DatosAutenticacionUsuario datos) {
-			User usuarioAutenticado = userRepo.findByNickAndPass(datos.getUsuario(), datos.getPassword());
-			if(usuarioAutenticado != null) {
-				String jwt = 
-			}
-			
-			return usuarioAutenticado;
-		}
+//		public JSON autenticaUsuario(DatosAutenticacionUsuario datos) {
+//			User usuarioAutenticado = userRepo.findByNickAndPass(datos.getUsuario(), datos.getPassword());
+//			if(usuarioAutenticado != null) {
+//				JSON jwt = 
+//			}
+//			
+//			return usuarioAutenticado;
+//		}
 	
 	//Get de todos los users
 		public List<User> getEntity() {

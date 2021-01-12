@@ -5,7 +5,6 @@ import java.security.Key;
 import javax.servlet.http.HttpServletRequest;
 
 import com.lvldungeons.model.entity.User;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;

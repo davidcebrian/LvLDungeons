@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lvldungeons.model.entity.DatosAutenticacionUsuario;
 import com.lvldungeons.model.entity.User;
 import com.lvldungeons.service.UserService;
 
@@ -22,6 +23,14 @@ public class UserController {
 
 	@Autowired 
 	private UserService userService; 
+	
+	@GetMapping("")
+	public ResponseEntity<?> autenticaUsuario(@RequestBody DatosAutenticacionUsuario datos){
+		ResponseEntity<?> response;
+		if(datos != null) response = ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.autenticaUsuario(datos));
+		else response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay datos");
+		return response;
+	}
 	
 	@GetMapping("all")
 	public ResponseEntity<?> getAllUsers() {

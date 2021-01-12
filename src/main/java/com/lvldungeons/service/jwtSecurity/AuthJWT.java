@@ -4,11 +4,14 @@ import java.security.Key;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Service;
+
 import com.lvldungeons.model.entity.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 
+@Service
 public class AuthJWT {
 
 	private static Key key;
@@ -16,7 +19,7 @@ public class AuthJWT {
 	/*
 	 * Creo el token jwt a partir del ID del usuario.
 	 */
-	public static String generarJWTDesdeId(User u) {
+	public static String generarJWTDesdeId(User u) throws Exception{
 		String jws = Jwts.builder().setSubject(""+u.getIdUsuario())
 				.signWith(SignatureAlgorithm.HS512, getGeneratedKey()).compact();
 		

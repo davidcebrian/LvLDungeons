@@ -23,6 +23,13 @@ public class UserController {
 	@Autowired 
 	private UserService userService; 
 	
+	@GetMapping("all")
+	public ResponseEntity<?> getAllUsers() {
+		ResponseEntity<?> response;
+		response = ResponseEntity.status(HttpStatus.OK).body(userService.getEntity());
+		return response;
+	}
+	
 	@GetMapping("{id}")
 	public ResponseEntity<?> getUsers(@PathVariable Long id) {
 		ResponseEntity<?> response;

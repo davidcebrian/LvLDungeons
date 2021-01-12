@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-
+import com.lvldungeons.model.entity.DatosAutenticacionUsuario;
 import com.lvldungeons.model.entity.User;
 import com.lvldungeons.model.repo.UserRepository;
 
@@ -22,6 +22,17 @@ public class UserService {
 	//Servicios
 	@Autowired
 	private UpdateService updateService;
+	
+	
+	//Autenticacion de usuario, devolviendo jwt creado a partir de un usuario.
+		public User autenticaUsuario(DatosAutenticacionUsuario datos) {
+			User usuarioAutenticado = userRepo.findByNickAndPass(datos.getUsuario(), datos.getPassword());
+			if(usuarioAutenticado != null) {
+				String jwt = 
+			}
+			
+			return usuarioAutenticado;
+		}
 	
 	//Get de todos los users
 		public List<User> getEntity() {

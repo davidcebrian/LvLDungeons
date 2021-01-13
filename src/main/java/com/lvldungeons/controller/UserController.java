@@ -78,7 +78,7 @@ public class UserController {
 	}
 	
 	@PutMapping("")
-	public ResponseEntity<?> updateUser(HttpServletRequest request, @RequestBody User user) {
+	public ResponseEntity<?> updateUserAut(HttpServletRequest request, @RequestBody User user) {
 		ResponseEntity<?> response;
 		response = ResponseEntity.status(HttpStatus.OK).body(userService.updateEntityAut(request, user));
 		return response;

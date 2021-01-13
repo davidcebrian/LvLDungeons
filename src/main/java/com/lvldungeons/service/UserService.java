@@ -67,12 +67,12 @@ public class UserService {
 			return userRepo.findById(id).get();
 		}
 		
-		//Crear un nuevo user
+	//Crear un nuevo user
 		public User saveEntity(User sent) {
 			return userRepo.save(sent);
 		}
 		
-		//Actualziar un user
+	//Actualziar un user
 		public User updateEntity(Long id, User sent) {
 			User us = userRepo.findById(id).get();
 			
@@ -83,20 +83,20 @@ public class UserService {
 			return us;
 		}
 		
-		//Actualziar un user autenticado
-				public User updateEntityAut(HttpServletRequest request, User sent) {
-					long id = AuthJWT.getIdUserDesdeRequest(request);
-					User us = userRepo.findById(id).get();
+	//Actualziar un user autenticado
+		public User updateEntityAut(HttpServletRequest request, User sent) {
+				long id = AuthJWT.getIdUserDesdeRequest(request);
+				User us = userRepo.findById(id).get();
 					
-					if(us !=null) {
-						updateService.updateUser(us, sent);
-						userRepo.save(us);
-					}
-					return us;
+				if(us !=null) {
+					updateService.updateUser(us, sent);
+					userRepo.save(us);
+				}
+				return us;
 				}
 				
 		
-		//Borrar un user
+	//Borrar un user
 		public void deleteEntity(Long id) {
 			userRepo.deleteById(id);
 		}

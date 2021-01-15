@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.lvldungeons.model.entity.DatosAutenticacionUsuario;
 import com.lvldungeons.model.entity.User;
 import com.lvldungeons.model.repo.UserRepository;
 import com.lvldungeons.service.jwtSecurity.AuthJWT;
@@ -33,11 +32,11 @@ public class UserService {
 	
 	
 	//Autenticacion de usuario, devolviendo jwt creado a partir de un usuario.
-		public JsonNode autenticaUsuario(DatosAutenticacionUsuario datos) {
+		public JsonNode autenticaUsuario(String username, String password) {
 			JsonNode jwt = null;
 			try {
 			jwt = mapper.readTree(new String ("{}"));
-			User usuarioAutenticado = userRepo.findByNickAndPass(datos.getUsuario(), datos.getPassword());
+			User usuarioAutenticado = userRepo.findByUsernameAndPassword(username, password);
 			((ObjectNode) jwt).put("jwt", AuthJWT.generarJWTDesdeId(usuarioAutenticado));
 			
 			} catch (Exception e) {

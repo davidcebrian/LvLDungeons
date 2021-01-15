@@ -19,8 +19,8 @@ public class User implements Serializable{
 	private long idUsuario;
 	private String nombre;
 	private String email;
-	private String nick;
-	private String pass;
+	private String username;
+	private String password;
 	private LocalDate fechaCreacion;
 	private int edad;
 	
@@ -36,8 +36,8 @@ public class User implements Serializable{
 		super();
 		this.nombre = nombre;
 		this.email = email;
-		this.nick = nick;
-		this.pass = pass;
+		this.username = nick;
+		this.password = pass;
 		this.fechaCreacion = LocalDate.now();
 		this.edad = edad;
 		this.personaje = personaje;
@@ -64,20 +64,20 @@ public class User implements Serializable{
 		this.email = email;
 	}
 
-	public String getNick() {
-		return nick;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNick(String nick) {
-		this.nick = nick;
+	public void setUsername(String nick) {
+		this.username = nick;
 	}
 
-	public String getPass() {
-		return pass;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setPassword(String pass) {
+		this.password = pass;
 	}
 
 	public LocalDate getFechaCreacion() {

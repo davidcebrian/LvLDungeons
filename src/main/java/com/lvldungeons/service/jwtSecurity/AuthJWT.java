@@ -20,7 +20,7 @@ public class AuthJWT {
 	 * Creo el token jwt a partir del ID del usuario.
 	 */
 	public static String generarJWTDesdeId(User u) throws Exception{
-		String jws = Jwts.builder().setSubject(""+u.getIdUsuario())
+		String jws = Jwts.builder().setSubject(""+Long.toString(u.getIdUsuario()))
 				.signWith(SignatureAlgorithm.HS512, getGeneratedKey()).compact();
 		
 		return jws;

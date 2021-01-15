@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lvldungeons.model.entity.DatosAutenticacionUsuario;
 import com.lvldungeons.model.entity.User;
 import com.lvldungeons.service.UserService;
 
@@ -27,10 +27,15 @@ public class UserController {
 	private UserService userService; 
 	
 	@GetMapping("")
-	public ResponseEntity<?> autenticaUsuario(@RequestBody DatosAutenticacionUsuario datos){
+	public ResponseEntity<?> autenticaUsuario(@RequestParam String username, @RequestParam String password){
 		ResponseEntity<?> response;
-		if(datos != null) response = ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.autenticaUsuario(datos));
-		else response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay datos");
+		if (username.equals("") || password.equals("")) {
+			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay datos");
+		
+		} else {
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.autenticaUsuario(username, password));	
+		}
+
 		return response;
 	}
 	

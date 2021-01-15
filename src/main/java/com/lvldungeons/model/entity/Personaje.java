@@ -53,7 +53,7 @@ public class Personaje implements Serializable {
 		super();
 		this.usuario = usuario;
 		this.idPersonaje = usuario.getIdUsuario();
-		this.nickname = usuario.getNick();
+		this.nickname = usuario.getUsername();
 		this.vida = VIDA_INI;
 		this.daño = VIDA_INI;
 		this.energia = MAX_ENER;

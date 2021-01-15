@@ -14,8 +14,8 @@ public class UpdateService {
 		original.setNombre((sent.getNombre() == null) ? original.getNombre() : sent.getNombre());
 		original.setEmail((sent.getEmail() == null) ? original.getEmail() : sent.getEmail());
 		original.setEdad((sent.getEdad() <= 0) ? original.getEdad() : sent.getEdad());
-		original.setNick((sent.getNick() == null) ? original.getNick() : sent.getNick());
-		original.setPass((sent.getPass() == null) ? original.getPass() : sent.getPass());
+		original.setUsername((sent.getUsername() == null) ? original.getUsername() : sent.getUsername());
+		original.setPassword((sent.getPassword() == null) ? original.getPassword() : sent.getPassword());
 	}
 
 	public void updatePersonaje(Personaje original, Personaje sent) {

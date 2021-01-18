@@ -46,6 +46,18 @@ public class UserService {
 			return jwt;
 		}
 	
+		//Crear un nuevo user
+		public User saveEntity(User sent) {
+			if (userRepo.findByEmail(sent.getEmail()) != null) {
+				sent = null;
+			} else if (userRepo.findByUsername(sent.getUsername()) != null) {
+				sent = null;
+			} else {
+				userRepo.save(sent);
+			}
+			return sent;
+		}
+		
 	//Devuelve los datos del usuario autenticado
 		public User datosAutenticado(HttpServletRequest request) {
 			long id = AuthJWT.getIdUserDesdeRequest(request);
@@ -66,10 +78,7 @@ public class UserService {
 			return userRepo.findById(id).get();
 		}
 		
-	//Crear un nuevo user
-		public User saveEntity(User sent) {
-			return userRepo.save(sent);
-		}
+
 		
 	//Actualziar un user
 		public User updateEntity(Long id, User sent) {

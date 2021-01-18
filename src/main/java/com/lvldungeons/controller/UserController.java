@@ -39,6 +39,20 @@ public class UserController {
 		return response;
 	}
 	
+	@PostMapping("")
+	public ResponseEntity<?> addUser(@RequestBody User user) {
+		ResponseEntity<?> response;
+		
+		User postUser = userService.saveEntity(user);
+		if (postUser == null) {
+			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ERROR 1: Ya existe el usuario");
+		} else {
+			response = ResponseEntity.status(HttpStatus.OK).body(postUser);	
+		}
+
+		return response;
+	}
+	
 	@GetMapping("autenticado")
 	public ResponseEntity<?> datosAutenticado(HttpServletRequest request){
 		ResponseEntity<?> response = null;
@@ -46,7 +60,7 @@ public class UserController {
 		if(request != null && user != null) {
 			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
 		}else {
-			ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe usuario.");
+			ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERROR 2: No existe el usuario");
 		}
 		return response;
 	}
@@ -66,13 +80,7 @@ public class UserController {
 		return response;
 	}
 	
-	@PostMapping("")
-	public ResponseEntity<?> addUser(@RequestBody User user) {
-		ResponseEntity<?> response;
-		response = ResponseEntity.status(HttpStatus.OK).body(userService.saveEntity(user));
 
-		return response;
-	}
 	
 	@PutMapping("{id}")
 	public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User user) {

@@ -42,6 +42,6 @@ public class UpdateService {
 		original.setDiseño((sent.getDiseño() == null) ? original.getDiseño() : sent.getDiseño());
 		original.setEfecto((sent.getEfecto() == null) ? original.getEfecto() : sent.getEfecto());
 		original.setNombre((sent.getNombre() == null) ? original.getNombre() : sent.getNombre());
-		original.setTipocarta((sent.getTipocarta() == null) ? original.getTipocarta() : sent.getTipocarta());
+		original.setTipoCarta((sent.getTipoCarta() == null) ? original.getTipoCarta() : sent.getTipoCarta());
 	}
 }

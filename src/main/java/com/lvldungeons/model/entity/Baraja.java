@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lvldungeons.model.enumerados.tipoBaraja;
+import com.lvldungeons.model.enumerados.TipoBaraja;
 
 @Entity
 public class Baraja implements Serializable{
@@ -26,7 +26,7 @@ public class Baraja implements Serializable{
 	@OneToMany(mappedBy = "baraja")
 	private List<Carta> cartas;
 	
-	private tipoBaraja tipobaraja;
+	private TipoBaraja tipobaraja;
 	
 	@OneToOne
 	@JoinColumn(name = "idPersonaje")
@@ -37,7 +37,7 @@ public class Baraja implements Serializable{
 		cartas = new ArrayList<Carta>();
 	}
 	
-	public Baraja(tipoBaraja tipo) {
+	public Baraja(TipoBaraja tipo) {
 		super();
 		cartas = new ArrayList<Carta>();
 		this.tipobaraja = tipo;
@@ -59,11 +59,11 @@ public class Baraja implements Serializable{
 		this.cartas = cartas;
 	}
 
-	public tipoBaraja getTipo() {
+	public TipoBaraja getTipo() {
 		return tipobaraja;
 	}
 
-	public void setTipo(tipoBaraja tipo) {
+	public void setTipo(TipoBaraja tipo) {
 		this.tipobaraja = tipo;
 	}
 

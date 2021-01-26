@@ -1,5 +1,5 @@
 package com.lvldungeons.model.enumerados;
 
-public enum tipoCarta {
+public enum TipoCarta {
 	HECHIZOS, EQUIPO, MONSTRUO, MALDICION
 }

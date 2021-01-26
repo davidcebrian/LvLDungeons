@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.lvldungeons.model.entity.User;
 import com.lvldungeons.service.UserService;
+import com.lvldungeons.service.Error.ManejoErrores;
 
 
 @RestController
@@ -26,14 +29,24 @@ public class UserController {
 	@Autowired 
 	private UserService userService; 
 	
+	@Autowired 
+	private ManejoErrores errorService;
+
 	@GetMapping("")
 	public ResponseEntity<?> autenticaUsuario(@RequestParam String username, @RequestParam String password){
 		ResponseEntity<?> response;
+		
 		if (username.equals("") || password.equals("")) {
-			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay datos");
+			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorService.generarError(1));
 		
 		} else {
-			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.autenticaUsuario(username, password));	
+			JsonNode jwt = userService.autenticaUsuario(username, password);
+			if (jwt == null) {			
+				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(errorService.generarError(3));	
+			} else {
+				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(jwt);	
+			}
+			
 		}
 
 		return response;
@@ -43,24 +56,29 @@ public class UserController {
 	public ResponseEntity<?> addUser(@RequestBody User user) {
 		ResponseEntity<?> response;
 		
-		User postUser = userService.saveEntity(user);
-		if (postUser == null) {
-			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ERROR 1: Ya existe el usuario");
-		} else {
-			response = ResponseEntity.status(HttpStatus.OK).body(postUser);	
+		if (user.getUsername().isBlank() || user.getPassword().isBlank() || user.getEmail().isBlank()) {
+			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorService.generarError(1));			
+		} else {			
+			User postUser = userService.saveEntity(user);
+			if (postUser == null) {
+				response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorService.generarError(2));
+			} 
+			else {
+				response = ResponseEntity.status(HttpStatus.OK).body(postUser);	
+			}
 		}
 
 		return response;
 	}
 	
 	@GetMapping("autenticado")
-	public ResponseEntity<?> datosAutenticado(HttpServletRequest request){
+	public ResponseEntity<?> datosAutenticado(HttpServletRequest request) {
 		ResponseEntity<?> response = null;
 		User user = userService.datosAutenticado(request);
 		if(request != null && user != null) {
 			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
 		}else {
-			ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERROR 2: No existe el usuario");
+			ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorService.generarError(1));
 		}
 		return response;
 	}

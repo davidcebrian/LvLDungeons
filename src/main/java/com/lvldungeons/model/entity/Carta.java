@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.lvldungeons.model.enumerados.tipoCarta;
+import com.lvldungeons.model.enumerados.TipoCarta;
 
 @Entity
 public class Carta implements Serializable{
@@ -22,7 +22,7 @@ public class Carta implements Serializable{
 	private String nombre;
 	private String efecto;
 	private int daño;
-	private tipoCarta tipocarta;
+	private TipoCarta tipoCarta;
 	private Blob diseño;
 	
 	@ManyToOne
@@ -37,12 +37,12 @@ public class Carta implements Serializable{
 		super();
 	}
 
-	public Carta(String nombre, String efecto, int daño, tipoCarta tipocarta, Blob diseño) {
+	public Carta(String nombre, String efecto, int daño, TipoCarta tipoCarta, Blob diseño) {
 		super();
 		this.nombre = nombre;
 		this.efecto = efecto;
 		this.daño = daño;
-		this.tipocarta = tipocarta;
+		this.tipoCarta = tipoCarta;
 		this.diseño = diseño;
 	}
 	
@@ -78,12 +78,12 @@ public class Carta implements Serializable{
 		this.daño = daño;
 	}
 
-	public tipoCarta getTipocarta() {
-		return tipocarta;
+	public TipoCarta getTipoCarta() {
+		return tipoCarta;
 	}
 
-	public void setTipocarta(tipoCarta tipocarta) {
-		this.tipocarta = tipocarta;
+	public void setTipoCarta(TipoCarta tipoCarta) {
+		this.tipoCarta = tipoCarta;
 	}
 
 	public Blob getDiseño() {

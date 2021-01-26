@@ -35,13 +35,13 @@ public class UserService {
 		public JsonNode autenticaUsuario(String username, String password) {
 			JsonNode jwt = null;
 			try {
-			jwt = mapper.readTree(new String ("{}"));
-			User usuarioAutenticado = userRepo.findByUsernameAndPassword(username, password);
-			((ObjectNode) jwt).put("jwt", AuthJWT.generarJWTDesdeId(usuarioAutenticado));
+				jwt = mapper.readTree(new String ("{}"));
+				User usuarioAutenticado = userRepo.findByUsernameAndPassword(username, password);
+				((ObjectNode) jwt).put("jwt", AuthJWT.generarJWTDesdeId(usuarioAutenticado));
 			
 			} catch (Exception e) {
-				((ObjectNode) jwt).put("jwt", "");
-				e.printStackTrace();
+				return null;
+				
 			}
 			return jwt;
 		}
@@ -93,15 +93,15 @@ public class UserService {
 		
 	//Actualziar un user autenticado
 		public User updateEntityAut(HttpServletRequest request, User sent) {
-				long id = AuthJWT.getIdUserDesdeRequest(request);
-				User us = userRepo.findById(id).get();
-					
-				if(us !=null) {
-					updateService.updateUser(us, sent);
-					userRepo.save(us);
-				}
-				return us;
-				}
+			long id = AuthJWT.getIdUserDesdeRequest(request);
+			User us = userRepo.findById(id).get();
+				
+			if(us !=null) {
+				updateService.updateUser(us, sent);
+				userRepo.save(us);
+			}
+			return us;
+		}
 				
 		
 	//Borrar un user

@@ -30,7 +30,7 @@ public class ManejoErrores {
 			((ObjectNode) errorJSON).put("mensaje", "Ya existe el nickname o email");				
 
 		} else if (error == 3) {
-			((ObjectNode) errorJSON).put("mensaje", "No se ha podido realizar el login");				
+			((ObjectNode) errorJSON).put("mensaje", "Usuario o contraseña incorrecta");				
 			
 		} else {
 			((ObjectNode) errorJSON).put("mensaje", "Error Indeterminado, Contacte con un administrador");				

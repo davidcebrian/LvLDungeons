@@ -32,8 +32,15 @@ public class UserController {
 	@Autowired 
 	private ManejoErrores errorService;
 
+	/**
+	 * Puede devolver un JSON con un error y un mensaje si el login no es correcto.
+	 * 
+	 * @param username String
+	 * @param password String
+	 * @return Token de sesion.
+	 */
 	@GetMapping("")
-	public ResponseEntity<?> autenticaUsuario(@RequestParam String username, @RequestParam String password){
+	public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password){
 		ResponseEntity<?> response;
 		
 		if (username.equals("") || password.equals("")) {
@@ -46,14 +53,18 @@ public class UserController {
 			} else {
 				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(jwt);	
 			}
-			
 		}
-
 		return response;
 	}
 	
+	/**
+	 * Devuelve el usuario recien creado, o un codigo de error y un mensaje.
+	 * 
+	 * @param user User
+	 * @return User.
+	 */
 	@PostMapping("")
-	public ResponseEntity<?> addUser(@RequestBody User user) {
+	public ResponseEntity<?> register(@RequestBody User user) {
 		ResponseEntity<?> response;
 		
 		if (user.getUsername().isBlank() || user.getPassword().isBlank() || user.getEmail().isBlank()) {
@@ -71,10 +82,16 @@ public class UserController {
 		return response;
 	}
 	
-	@GetMapping("autenticado")
-	public ResponseEntity<?> datosAutenticado(HttpServletRequest request) {
+	/**
+	 * Te devuelve un usuario que use un parametro Authorization correcto en la peticion
+	 * 
+	 * @param user User
+	 * @return User.
+	 */
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getUserWithToken(HttpServletRequest request, @PathVariable long id) {
 		ResponseEntity<?> response = null;
-		User user = userService.datosAutenticado(request);
+		User user = userService.datosAutenticado(request, id);
 		if(request != null && user != null) {
 			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
 		}else {
@@ -83,6 +100,14 @@ public class UserController {
 		return response;
 	}
 	
+	
+	/*
+	 *    METODOS DEPRECATED
+	 *    
+	 *    Aun no cumplen ninguna funcion o solo tienen sentido para realizar pruebas en el entorno de desarrollo.
+	 */
+	
+	// Obtener todos los usuarios
 	@GetMapping("all")
 	public ResponseEntity<?> getAllUsers() {
 		ResponseEntity<?> response;
@@ -90,16 +115,7 @@ public class UserController {
 		return response;
 	}
 	
-	@GetMapping("{id}")
-	public ResponseEntity<?> getUsers(@PathVariable Long id) {
-		ResponseEntity<?> response;
-		response = ResponseEntity.status(HttpStatus.OK).body(userService.getEntityById(id));
-		
-		return response;
-	}
-	
-
-	
+	// Actualizar un usuario
 	@PutMapping("{id}")
 	public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User user) {
 		ResponseEntity<?> response;
@@ -115,6 +131,8 @@ public class UserController {
 		return response;
 	}
 	
+	
+	// Borrar un usuario
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> deleteUser(@PathVariable Long id) {
 		ResponseEntity<?> response;

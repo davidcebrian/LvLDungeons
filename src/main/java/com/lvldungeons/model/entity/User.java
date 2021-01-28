@@ -14,16 +14,20 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class User implements Serializable{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idUsuario;
 	private String nombre;
 	
+	
+	//El correo y la contraseña deben ser unicos.
 	@Column(nullable = false)
 	private String email;
-	
 	@Column(nullable = false)
 	private String username;
+	
+	
 	private String password;
 	private LocalDate fechaCreacion;
 	private int edad;
@@ -31,6 +35,10 @@ public class User implements Serializable{
 	@OneToOne(mappedBy = "usuario",cascade = CascadeType.ALL)
 	private Personaje personaje;
 	
+	
+	/*
+	 * Constructores
+	 */
 	public User() {
 		super();
 		this.personaje = new Personaje();
@@ -47,10 +55,12 @@ public class User implements Serializable{
 		this.personaje = personaje;
 	}
 
+	/*
+	 * Getters y Setters
+	 */
 	public long getIdUsuario() {
 		return idUsuario;
 	}
-
 
 	public String getNombre() {
 		return nombre;

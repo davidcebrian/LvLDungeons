@@ -12,11 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class FilterJWT implements Filter {
 
+	/**
+	 * Realiza el filtrado de todas las peticiones, si el id no existe va a tomar el valor -1 y no dejara pasar la peticion.
+	 */
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		int idUser = AuthJWT.getIdUserDesdeRequest((HttpServletRequest) request);
+		long idUser = AuthJWT.getIdUserDesdeRequest((HttpServletRequest) request);
 		
 		if (idUser != -1) {
 			chain.doFilter(request, response);
@@ -24,5 +27,4 @@ public class FilterJWT implements Filter {
 			((HttpServletResponse) response).sendError(403, "No Auth");
 		}
 	}
-
 }

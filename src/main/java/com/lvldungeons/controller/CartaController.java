@@ -23,6 +23,15 @@ public class CartaController {
 	@Autowired 
 	private CartaService cartaService; 
 	
+	
+	
+	/*
+	 *    METODOS DEPRECATED
+	 *    
+	 *    Aun no cumplen ninguna funcion o solo tienen sentido para realizar pruebas en el entorno de desarrollo.
+	 * 
+	 * 	  Estos metodos en concreto son solo para hacer un crud basico ya que aun no trabajamos con esta entidad desde el front.
+	 */
 	@GetMapping("{id}")
 	public ResponseEntity<?> getCartas(@PathVariable Long id) {
 		ResponseEntity<?> response;

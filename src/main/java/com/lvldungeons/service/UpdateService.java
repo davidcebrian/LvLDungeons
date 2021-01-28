@@ -10,6 +10,12 @@ import com.lvldungeons.model.entity.User;
 @Service
 public class UpdateService {
 
+	
+	/*
+	 * Todos los metodos de este servicio hacen exactamente lo mismo, recoge dos objetos del mismo tipo, y van a tratar de actualizar los campos que hayan cambiado,
+	 * para eso, por cada uno de los atributos del nuevo objeto se compara con null, si contienen informacion se cambian, sino, se mantiene el original.
+	 */
+	
 	public void updateUser (User original, User sent) {
 		original.setNombre((sent.getNombre() == null) ? original.getNombre() : sent.getNombre());
 		original.setEmail((sent.getEmail() == null) ? original.getEmail() : sent.getEmail());

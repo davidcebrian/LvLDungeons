@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.sql.Blob;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,9 +23,11 @@ public class Carta implements Serializable{
 	
 	private String nombre;
 	private String efecto;
-	private int daño;
-	private TipoCarta tipoCarta;
+	private int daño;	
 	private Blob diseño;
+	
+	@Enumerated(EnumType.STRING)
+	private TipoCarta tipoCarta;
 	
 	@ManyToOne
 	@JoinColumn(name = "idBaraja", nullable = true)
@@ -33,6 +37,11 @@ public class Carta implements Serializable{
 	@JoinColumn(name = "idPersonaje", nullable = true)
 	private Personaje personaje;
 	
+	
+	
+	/*
+	 * Constructores
+	 */
 	public Carta(){
 		super();
 	}
@@ -46,6 +55,10 @@ public class Carta implements Serializable{
 		this.diseño = diseño;
 	}
 	
+	
+	/*
+	 * Getters y Setters
+	 */
 	public Baraja getBaraja() {
 		return baraja;
 	}

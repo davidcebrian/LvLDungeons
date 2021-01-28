@@ -11,13 +11,22 @@ public class ManejoErrores {
 	private ObjectMapper mapper;
 	private JsonNode errorJSON;
 	
+	/*
+	 * Constructor.
+	 */
 	private ManejoErrores() {
 		super();
 		mapper = new ObjectMapper();
 		reiniciarError();
 	}
 	
-	
+	/**
+	 * 
+	 * Recibe un codigo de error, y devuelve un JSON con el codigo enviado y un mensaje predefinido.
+	 * 
+	 * @param Integer error 
+	 * @return JSON
+	 */
 	public JsonNode generarError(Integer error) {
 		reiniciarError();
 		
@@ -40,6 +49,10 @@ public class ManejoErrores {
 		return errorJSON;
 	}
 	
+	
+	/**
+	 * Reinicia el JSON de error.
+	 */
 	private void reiniciarError() {
 		try {
 			errorJSON = mapper.readTree(new String ("{}"));

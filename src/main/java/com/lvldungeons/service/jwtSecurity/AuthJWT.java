@@ -32,10 +32,10 @@ public class AuthJWT {
 	 * 
 	 * Si devuelve -1, no existe el usuario
 	 */
-	public static int getIdUserDesdeJWT(String jwt) {
-		int id;
+	public static long getIdUserDesdeJWT(String jwt) {
+		long id;
 		try {
-			id = Integer.parseInt(Jwts.parser().setSigningKey(getGeneratedKey()).parseClaimsJws(jwt).getBody().getSubject());
+			id = Long.parseLong(Jwts.parser().setSigningKey(getGeneratedKey()).parseClaimsJws(jwt).getBody().getSubject());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			id = -1;
@@ -48,12 +48,12 @@ public class AuthJWT {
 	 * 
 	 * Si devuelve -1, no existe el usuario
 	 */
-	public static int getIdUserDesdeRequest(HttpServletRequest request) {
+	public static long getIdUserDesdeRequest(HttpServletRequest request) {
 		String authHeader = request.getHeader("Authorization");
-		int id;
-		
+		long id;
+		System.out.println(authHeader);
 		if (authHeader != null && authHeader.length() > 8) {
-			id = getIdUserDesdeJWT(authHeader.substring(7));
+			id = getIdUserDesdeJWT(authHeader.split(" ")[1]);
 		} else {
 			id = -1;
 		}

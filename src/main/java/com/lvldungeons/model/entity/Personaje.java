@@ -17,13 +17,16 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Personaje implements Serializable {
-	
-	private static final int VIDA_INI = 3;
-	private static final int MAX_VIDA = 10;
-	private static final int MIN_VIDA = 0;
-	private static final int MAX_ENER = 10;
-	private static final int MIN_ENER = 0;
-	private static final int MAX_MANO_VIVO_FINAL = 5;
+
+	/*
+	 * Constantes
+	 */
+	private static final int VIDA_INI = 3;  				//Vida inicial del personaje
+	private static final int MAX_VIDA = 10;  			//Vida maxima del personaje
+	private static final int MIN_VIDA = 0;				//Vida minima del personaje
+	private static final int MAX_ENER = 10;				//Energia maxima del personaje
+	private static final int MIN_ENER = 0;				//Energia minima del personaje
+	private static final int MAX_MANO_VIVO_FINAL = 5;	//Maximo de cartas en la mano al finalizar un turno.
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +47,10 @@ public class Personaje implements Serializable {
 	@JoinColumn(name = "idUsuario")
 	private User usuario;
 	
+	
+	/*
+	 * Constructores
+	 */
 	public Personaje() {
 		super();
 		equipamiento = new ArrayList<Carta>();
@@ -61,6 +68,10 @@ public class Personaje implements Serializable {
 		equipamiento = new ArrayList<Carta>();
 	}
 
+	
+	/*
+	 * Getters y Setters
+	 */
 	public int getVida() {
 		return vida;
 	}

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,12 +28,17 @@ public class Baraja implements Serializable{
 	@OneToMany(mappedBy = "baraja")
 	private List<Carta> cartas;
 	
+	@Enumerated(EnumType.STRING)
 	private TipoBaraja tipobaraja;
 	
 	@OneToOne
 	@JoinColumn(name = "idPersonaje")
 	private Personaje personaje;
 	
+	
+	/*
+	 * Constructores
+	 */
 	public Baraja() {
 		super();
 		cartas = new ArrayList<Carta>();
@@ -43,6 +50,9 @@ public class Baraja implements Serializable{
 		this.tipobaraja = tipo;
 	}
 
+	/*
+	 * Getters y setters
+	 */
 	public Personaje getPersonaje() {
 		return personaje;
 	}

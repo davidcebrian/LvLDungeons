@@ -51,7 +51,6 @@ public class AuthJWT {
 	public static long getIdUserDesdeRequest(HttpServletRequest request) {
 		String authHeader = request.getHeader("Authorization");
 		long id;
-		System.out.println(authHeader);
 		if (authHeader != null && authHeader.length() > 8) {
 			id = getIdUserDesdeJWT(authHeader.split(" ")[1]);
 		} else {

@@ -1,36 +1,27 @@
 package com.lvldungeons.model.entity;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.lvldungeons.model.entity.base.AbstractEntity;
 
+
+@SuppressWarnings("serial")
 @Entity
-public class User implements Serializable{
+public class User extends AbstractEntity {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idUsuario;
-	private String nombre;
+
+	private String nombre;	
+	private int edad;
 	
-	
-	//El correo y la contraseña deben ser unicos.
 	@Column(nullable = false)
 	private String email;
 	@Column(nullable = false)
 	private String username;
 	
-	
 	private String password;
-	private LocalDate fechaCreacion;
-	private int edad;
 	
 	@OneToOne(mappedBy = "usuario",cascade = CascadeType.ALL)
 	private Personaje personaje;
@@ -50,7 +41,6 @@ public class User implements Serializable{
 		this.email = email;
 		this.username = nick;
 		this.password = pass;
-		this.fechaCreacion = LocalDate.now();
 		this.edad = edad;
 		this.personaje = personaje;
 	}
@@ -58,10 +48,6 @@ public class User implements Serializable{
 	/*
 	 * Getters y Setters
 	 */
-	public long getIdUsuario() {
-		return idUsuario;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
@@ -93,12 +79,7 @@ public class User implements Serializable{
 	public void setPassword(String pass) {
 		this.password = pass;
 	}
-
-	public LocalDate getFechaCreacion() {
-		return fechaCreacion;
-	}
-
-
+	
 	public int getEdad() {
 		return edad;
 	}

@@ -1,22 +1,19 @@
 package com.lvldungeons.model.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
+import com.lvldungeons.model.entity.base.AbstractEntity;
+
+@SuppressWarnings("serial")
 @Entity
-public class Personaje implements Serializable {
+public class Personaje extends AbstractEntity {
 
 	/*
 	 * Constantes
@@ -28,9 +25,6 @@ public class Personaje implements Serializable {
 	private static final int MIN_ENER = 0;				//Energia minima del personaje
 	private static final int MAX_MANO_VIVO_FINAL = 5;	//Maximo de cartas en la mano al finalizar un turno.
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idPersonaje;
 	private String nickname;
 	private int vida;
 	private int daño;
@@ -59,7 +53,6 @@ public class Personaje implements Serializable {
 	public Personaje(User usuario, Baraja mano) {
 		super();
 		this.usuario = usuario;
-		this.idPersonaje = usuario.getIdUsuario();
 		this.nickname = usuario.getUsername();
 		this.vida = VIDA_INI;
 		this.daño = VIDA_INI;
@@ -148,16 +141,7 @@ public class Personaje implements Serializable {
 		return MAX_MANO_VIVO_FINAL;
 	}
 
-	public long getIdPersonaje() {
-		return idPersonaje;
-	}
-
 	public String getNickname() {
 		return nickname;
 	}
-	
-	
-	
-	
-	
 }

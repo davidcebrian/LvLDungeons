@@ -1,29 +1,22 @@
 package com.lvldungeons.model.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lvldungeons.model.entity.base.AbstractEntity;
 import com.lvldungeons.model.enumerados.TipoBaraja;
 
+@SuppressWarnings("serial")
 @Entity
-public class Baraja implements Serializable{
+public class Baraja extends AbstractEntity {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idBaraja;
 	
 	@OneToMany(mappedBy = "baraja")
 	private List<Carta> cartas;
@@ -75,11 +68,6 @@ public class Baraja implements Serializable{
 
 	public void setTipo(TipoBaraja tipo) {
 		this.tipobaraja = tipo;
-	}
-
-	public long getIdBaraja() {
-		return idBaraja;
-	}
-	
+	}	
 	
 }

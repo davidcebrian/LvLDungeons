@@ -1,25 +1,18 @@
 package com.lvldungeons.model.entity;
 
-import java.io.Serializable;
 import java.sql.Blob;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.lvldungeons.model.entity.base.AbstractEntity;
 import com.lvldungeons.model.enumerados.TipoCarta;
 
 @Entity
-public class Carta implements Serializable{
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idCarta;
+public class Carta extends AbstractEntity {
 	
 	private String nombre;
 	private String efecto;
@@ -106,11 +99,5 @@ public class Carta implements Serializable{
 	public void setDiseño(Blob diseño) {
 		this.diseño = diseño;
 	}
-
-	public long getIdCarta() {
-		return idCarta;
-	}
-	
-	
 	
 }

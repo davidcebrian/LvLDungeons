@@ -34,7 +34,7 @@ public class UserService {
 			jwt = mapper.readTree(new String("{}"));
 			User usuarioAutenticado = userRepo.findByUsernameAndPassword(username, password);
 			((ObjectNode) jwt).put("jwt", AuthJWT.generarJWTDesdeId(usuarioAutenticado));
-			((ObjectNode) jwt).put("id", usuarioAutenticado.getIdUsuario());
+			((ObjectNode) jwt).put("id", usuarioAutenticado.getId());
 		} catch (Exception e) {
 			return null;
 		}

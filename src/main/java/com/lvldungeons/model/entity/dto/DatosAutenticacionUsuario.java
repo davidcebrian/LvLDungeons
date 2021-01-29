@@ -1,4 +1,4 @@
-package com.lvldungeons.model.entity;
+package com.lvldungeons.model.entity.dto;
 
 public class DatosAutenticacionUsuario {
 	private String usuario;

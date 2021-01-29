@@ -72,10 +72,10 @@ public class UserController {
 		} else {			
 			User postUser = userService.saveEntity(user);
 			if (postUser == null) {
-				response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorService.generarError(2));
+				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(errorService.generarError(2));
 			} 
 			else {
-				response = ResponseEntity.status(HttpStatus.OK).body(postUser);	
+				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(postUser);	
 			}
 		}
 

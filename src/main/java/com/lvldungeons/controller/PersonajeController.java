@@ -1,19 +1,22 @@
 package com.lvldungeons.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lvldungeons.model.entity.Partida;
 import com.lvldungeons.model.entity.Personaje;
+import com.lvldungeons.service.GenerateDTOService;
 import com.lvldungeons.service.PersonajeService;
+import com.lvldungeons.service.Error.ManejoErrores;
 
 @RestController
 @RequestMapping(path = "personaje")
@@ -22,45 +25,61 @@ public class PersonajeController {
 	@Autowired 
 	private PersonajeService personajeService; 
 	
+	@Autowired 
+	private ManejoErrores errorService;
 	
-	/*
-	 *    METODOS DEPRECATED
-	 *    
-	 *    Aun no cumplen ninguna funcion o solo tienen sentido para realizar pruebas en el entorno de desarrollo.
-	 * 
-	 * 	  Estos metodos en concreto son solo para hacer un crud basico ya que aun no trabajamos con esta entidad desde el front.
-	 */
-	@GetMapping("{id}")
-	public ResponseEntity<?> getPersonajes(@PathVariable Long id) {
+	@PostMapping("/{id}")
+	public ResponseEntity<?> empezarPartida(HttpServletRequest request, @PathVariable Long id){
 		ResponseEntity<?> response;
-		response = ResponseEntity.status(HttpStatus.OK).body(personajeService.getEntityById(id));
+		Personaje personaje;
+		Partida partida;
+		
+		personaje = this.personajeService.getPersonajeFromToken(request, id);
+		
+		if (personaje != null) {
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
+					GenerateDTOService.generatePartidaDTO(personajeService.iniciarPartida(personaje))
+			);
+		} else {
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(errorService.generarError(4));
+		}
+		return response;
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<?> unirsePartida(HttpServletRequest request, @PathVariable Long id, @RequestParam String token){
+		ResponseEntity<?> response;
+		Personaje personaje;
+		Partida partida;
+		
+		personaje = this.personajeService.getPersonajeFromToken(request, id);
+
+		if (personaje != null) {
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
+					GenerateDTOService.generatePartidaDTO(personajeService.unirsePartida(personaje, token))
+			);
+		} else {
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(errorService.generarError(5));
+		}
 		
 		return response;
 	}
 	
-	@PostMapping("")
-	public ResponseEntity<?> addPersonaje(@RequestBody Personaje personaje) {
+	@GetMapping("/get/{id}")
+	public ResponseEntity<?> obtenerPartida(HttpServletRequest request, @PathVariable Long id, @RequestParam String token){
 		ResponseEntity<?> response;
-		response = ResponseEntity.status(HttpStatus.OK).body(personajeService.saveEntity(personaje));
+		Personaje personaje;
+		Partida partida;
 		
-		return response;
-	}
-	
-	@PutMapping("{id}")
-	public ResponseEntity<?> updatePersonaje(@PathVariable Long id, @RequestBody Personaje personaje) {
-		ResponseEntity<?> response;
-		response = ResponseEntity.status(HttpStatus.OK).body(personajeService.updateEntity(id, personaje));
+		personaje = this.personajeService.getPersonajeFromToken(request, id);
 		
-		return response;
-	}
-	
-	@DeleteMapping("{id}")
-	public ResponseEntity<?> deletePersonaje(@PathVariable Long id) {
-		ResponseEntity<?> response;
-		
-		personajeService.deleteEntity(id);
-		response = ResponseEntity.status(HttpStatus.OK).body("Se ha eliminado la entidad: " + id.toString());
-		
+		if (personaje != null) {
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
+					GenerateDTOService.generatePartidaDTO(personajeService.obtenerPartida(personaje, token))
+			);
+		} else {
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(errorService.generarError(6));
+		}
 		return response;
 	}
 }

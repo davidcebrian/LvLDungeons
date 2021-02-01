@@ -3,6 +3,8 @@ package com.lvldungeons.model.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import com.lvldungeons.model.entity.base.AbstractEntity;
@@ -11,40 +13,29 @@ import com.lvldungeons.model.entity.base.AbstractEntity;
 @SuppressWarnings("serial")
 @Entity
 public class User extends AbstractEntity {
-	
 
-	private String nombre;	
-	private int edad;
-	
-	@Column(nullable = false)
+	private String nombre;
+	private Integer edad;
+
+	@Column(nullable = false, unique = true)
 	private String email;
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String username;
-	
+	@Column(nullable = false)
 	private String password;
-	
-	@OneToOne(mappedBy = "usuario",cascade = CascadeType.ALL)
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "personaje_id", referencedColumnName = "id", nullable = false)
 	private Personaje personaje;
-	
 	
 	/*
 	 * Constructores
 	 */
 	public User() {
 		super();
-		this.personaje = new Personaje();
+		this.personaje = new Personaje(this);
 	}
 	
-	public User(String nombre, String email, String nick, String pass, int edad, Personaje personaje) {
-		super();
-		this.nombre = nombre;
-		this.email = email;
-		this.username = nick;
-		this.password = pass;
-		this.edad = edad;
-		this.personaje = personaje;
-	}
-
 	/*
 	 * Getters y Setters
 	 */

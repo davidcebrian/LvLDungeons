@@ -40,7 +40,16 @@ public class ManejoErrores {
 
 		} else if (error == 3) {
 			((ObjectNode) errorJSON).put("mensaje", "Usuario o contraseña incorrecta");				
-			
+		
+		} else if (error == 4) {
+			((ObjectNode) errorJSON).put("mensaje", "No se ha podido iniciar la partida");				
+		
+		} else if (error == 5) {
+			((ObjectNode) errorJSON).put("mensaje", "No se puede unir a la partida");				
+		
+		} else if (error == 6) {
+			((ObjectNode) errorJSON).put("mensaje", "No se ha podido acceder a la partida");				
+		
 		} else {
 			((ObjectNode) errorJSON).put("mensaje", "Error Indeterminado, Contacte con un administrador");				
 			

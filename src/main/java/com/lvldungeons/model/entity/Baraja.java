@@ -3,29 +3,25 @@ package com.lvldungeons.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import com.lvldungeons.model.entity.base.AbstractEntity;
-import com.lvldungeons.model.enumerados.TipoBaraja;
+import com.lvldungeons.model.enumerate.TipoBaraja;
 
 @SuppressWarnings("serial")
 @Entity
 public class Baraja extends AbstractEntity {
 	
-	
-	@OneToMany(mappedBy = "baraja")
+	@ElementCollection
 	private List<Carta> cartas;
 	
 	@Enumerated(EnumType.STRING)
 	private TipoBaraja tipobaraja;
 	
-	@OneToOne
-	@JoinColumn(name = "idPersonaje")
+
 	private Personaje personaje;
 	
 	

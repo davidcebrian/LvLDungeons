@@ -1,12 +1,14 @@
 package com.lvldungeons.service;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lvldungeons.model.entity.Partida;
 import com.lvldungeons.model.entity.Personaje;
-import com.lvldungeons.model.repo.PersonajeRepository;
+import com.lvldungeons.model.entity.User;
+import com.lvldungeons.model.repository.PersonajeRepository;
 
 @Service
 public class PersonajeService {
@@ -18,36 +20,46 @@ public class PersonajeService {
 	// Servicios
 	@Autowired
 	private UpdateService updateService;
+	@Autowired 
+	private UserService userService;
+	@Autowired
+	private PartidaService partidaService;
 
-	// Get de todos los personajes
-	public List<Personaje> getEntity() {
-		return (List<Personaje>) persoRepo.findAll();
+	public Personaje getPersonajeFromToken(HttpServletRequest request, long id) {
+		User user = userService.datosAutenticado(request, id);
+		
+		return (user != null) ? user.getPersonaje() : null;
 	}
-
-	// Get de un user por id
-	public Personaje getEntityById(Long id) {
-		Personaje p = persoRepo.findById(id).get();
-		return p;
-	}
-
-	// Crear un nuevo user
-	public Personaje saveEntity(Personaje sent) {
-		return persoRepo.save(sent);
-	}
-
-	// Actualziar un user
-	public Personaje updateEntity(Long id, Personaje sent) {
-		Personaje us = persoRepo.findById(id).get();
-
-		if (us != null) {
-			updateService.updatePersonaje(us, sent);
-			persoRepo.save(us);
+	
+	public Partida iniciarPartida(Personaje personaje) {
+		Partida partida;
+		if (personaje.getPartida() != null) {
+			partidaService.removePartida(personaje.getPartida());
 		}
-		return us;
+		
+		partida = personaje.iniciarPartida();
+		
+		persoRepo.save(personaje);
+		
+		return partida;
 	}
 
-	// Borrar un user
-	public void deleteEntity(Long id) {
-		persoRepo.deleteById(id);
+	public Partida unirsePartida(Personaje personaje, String token) {
+		
+		Partida partida = partidaService.getPartidaByToken(token);
+		
+		partida.addPersonaje(personaje);
+		
+		persoRepo.save(personaje);
+		
+		return partidaService.savePartida(partida);
 	}
+
+	public Partida obtenerPartida(Personaje personaje, String token) {
+		
+		Partida partida = partidaService.getPartidaByToken(token);
+		
+		return (partida != null) ? partida : null;
+	}
+
 }

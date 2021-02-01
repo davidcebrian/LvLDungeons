@@ -9,8 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.lvldungeons.model.entity.base.AbstractEntity;
-import com.lvldungeons.model.enumerados.TipoCarta;
+import com.lvldungeons.model.enumerate.TipoCarta;
 
+@SuppressWarnings("serial")
 @Entity
 public class Carta extends AbstractEntity {
 	
@@ -22,15 +23,9 @@ public class Carta extends AbstractEntity {
 	@Enumerated(EnumType.STRING)
 	private TipoCarta tipoCarta;
 	
-	@ManyToOne
-	@JoinColumn(name = "idBaraja", nullable = true)
 	private Baraja baraja;
-	
-	@ManyToOne
-	@JoinColumn(name = "idPersonaje", nullable = true)
+
 	private Personaje personaje;
-	
-	
 	
 	/*
 	 * Constructores
@@ -47,7 +42,6 @@ public class Carta extends AbstractEntity {
 		this.tipoCarta = tipoCarta;
 		this.diseño = diseño;
 	}
-	
 	
 	/*
 	 * Getters y Setters
@@ -99,5 +93,4 @@ public class Carta extends AbstractEntity {
 	public void setDiseño(Blob diseño) {
 		this.diseño = diseño;
 	}
-	
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lvldungeons.model.entity.Carta;
-import com.lvldungeons.model.repo.CartaRepository;
+import com.lvldungeons.model.repository.CartaRepository;
 
 @Service
 public class CartaService {

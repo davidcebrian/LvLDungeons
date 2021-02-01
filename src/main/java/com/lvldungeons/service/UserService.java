@@ -1,7 +1,5 @@
 package com.lvldungeons.service;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.lvldungeons.model.entity.User;
-import com.lvldungeons.model.repo.UserRepository;
+import com.lvldungeons.model.repository.UserRepository;
 import com.lvldungeons.service.jwtSecurity.AuthJWT;
 
 @Service
@@ -63,29 +61,7 @@ public class UserService {
 		} else {
 			user = null;
 		}
-
 		return user;
-	}
-
-	// Get de todos los users
-	public List<User> getEntity() {
-		return (List<User>) userRepo.findAll();
-	}
-
-	// Get de un user por id
-	public User getEntityById(Long id) {
-		return userRepo.findById(id).get();
-	}
-
-	// Actualziar un user
-	public User updateEntity(Long id, User sent) {
-		User us = userRepo.findById(id).get();
-
-		if (us != null) {
-			updateService.updateUser(us, sent);
-			userRepo.save(us);
-		}
-		return us;
 	}
 
 	// Actualziar un user autenticado
@@ -98,10 +74,5 @@ public class UserService {
 			userRepo.save(us);
 		}
 		return us;
-	}
-
-	// Borrar un user
-	public void deleteEntity(Long id) {
-		userRepo.deleteById(id);
 	}
 }

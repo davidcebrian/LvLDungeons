@@ -24,16 +24,6 @@ public class UpdateService {
 		original.setPassword((sent.getPassword() == null) ? original.getPassword() : sent.getPassword());
 	}
 
-	public void updatePersonaje(Personaje original, Personaje sent) {
-		original.setDaño((sent.getDaño() < 0) ? original.getDaño() : sent.getDaño());
-		original.setEnergia((sent.getEnergia() < 0) ? original.getEnergia() : sent.getEnergia());
-		original.setEquipamiento((sent.getEquipamiento() == null) ? original.getEquipamiento() : sent.getEquipamiento());
-		original.setMano((sent.getMano()== null) ? original.getMano() : sent.getMano());
-		original.setUsuario((sent.getUsuario() == null) ? original.getUsuario() : sent.getUsuario());
-		original.setVida((sent.getVida() < 0) ? original.getVida() : sent.getVida());
-		original.setVivo((sent.isVivo()) ? original.isVivo() : sent.isVivo());
-
-	}
 
 	public void updateBaraja(Baraja original, Baraja sent) {
 		original.setCartas((sent.getCartas() == null) ? original.getCartas() : sent.getCartas());

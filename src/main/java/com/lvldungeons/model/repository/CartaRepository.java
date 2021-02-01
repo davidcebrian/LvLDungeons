@@ -1,4 +1,4 @@
-package com.lvldungeons.model.repo;
+package com.lvldungeons.model.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

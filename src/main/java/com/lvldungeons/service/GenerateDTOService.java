@@ -18,7 +18,7 @@ public class GenerateDTOService {
 	public static UserDTO generateUserDTO(User postUser) {
 		
 		Personaje pj = postUser.getPersonaje();
-		PersonajeDTO pjDTO = new PersonajeDTO(pj.getVida(), pj.getDaño(), pj.getEnergia(), pj.getVivo());
+		PersonajeDTO pjDTO = generatePersonajeDTO(pj);
 		
 		UserDTO userDTO = new UserDTO(postUser.getEmail(), postUser.getUsername(), pjDTO);
 		
@@ -38,13 +38,20 @@ public class GenerateDTOService {
 		
 		for (int i=0; i<personajes.size(); i++) {
 			pj = personajes.get(i);
-			pjDTO = new PersonajeDTO(pj.getVida(), pj.getDaño(), pj.getEnergia(), pj.getVivo());
+			pjDTO = generatePersonajeDTO(pj);
 			personajesDTO.add(pjDTO);
 		}
 		
 		
-		PartidaDTO partidaDTO = new PartidaDTO(postPartida.getToken(), personajesDTO);
+		PartidaDTO partidaDTO = new PartidaDTO(postPartida.getToken(), postPartida.getIniciada(), personajesDTO);
 		
 		return partidaDTO;
+	}
+	
+	public static PersonajeDTO generatePersonajeDTO(Personaje pj) {
+		PersonajeDTO personajeDTO = new PersonajeDTO(pj.getId(), pj.getVida(), pj.getDaño(), pj.getEnergia(), pj.getVivo(), pj.getEmpezarPartida());
+		
+		return personajeDTO;
+		
 	}
 }

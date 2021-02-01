@@ -10,11 +10,13 @@ import com.lvldungeons.model.entity.Personaje;
 public class PartidaDTO {
 	private String token;
 	private List<PersonajeDTO> personajes;
+	private Boolean iniciada;
 	
-	public PartidaDTO(String token, List<PersonajeDTO> personajes) {
+	public PartidaDTO(String token, Boolean iniciada, List<PersonajeDTO> personajes) {
 		super();
 		this.token = token;
 		this.personajes = personajes;
+		this.iniciada = iniciada;
 	}
 
 	public PartidaDTO() {
@@ -29,15 +31,24 @@ public class PartidaDTO {
 		this.token = token;
 	}
 
-	public List<PersonajeDTO> getPersonajesDTO() {
+	public Boolean getIniciada() {
+		return iniciada;
+	}
+	
+	public void setIniciada(Boolean iniciada) {
+		this.iniciada = iniciada;
+	}
+
+	public List<PersonajeDTO> getPersonajes() {
 		return personajes;
 	}
 
-	public void setPersonajesDTO(List<PersonajeDTO> personajes) {
+	public void setPersonajes(List<PersonajeDTO> personajes) {
 		this.personajes = personajes;
 	}
 	
 	public void addPersonajesDTO(PersonajeDTO personaje) {
 		this.personajes.add(personaje);
 	}
+
 }

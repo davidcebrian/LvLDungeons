@@ -9,6 +9,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -35,6 +36,8 @@ public class Personaje extends AbstractEntity {
 	private Integer energia;
 	private Boolean vivo;
 
+	private Boolean empezarPartida;
+	
 	@OneToOne(mappedBy = "personaje")
 	private User usuario;
     
@@ -42,6 +45,8 @@ public class Personaje extends AbstractEntity {
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "partida_id")
     private Partida partida;
+    
+    
 	
     //@ElementCollection
 	//private List<Carta> mano;
@@ -164,6 +169,7 @@ public class Personaje extends AbstractEntity {
 		this.daño = VIDA_INI;
 		this.energia = MAX_ENER;
 		this.vivo = true;
+		this.empezarPartida = false;
 		
 		//this.mano = new ArrayList<Carta>();
 		
@@ -176,5 +182,13 @@ public class Personaje extends AbstractEntity {
 			put(TipoEquipo.BOTAS, null);
 		}};
 	*/
+	}
+
+	public Boolean getEmpezarPartida() {
+		return empezarPartida;
+	}
+
+	public void setEmpezarPartida(Boolean empezarPartida) {
+		this.empezarPartida = empezarPartida;
 	}
 }

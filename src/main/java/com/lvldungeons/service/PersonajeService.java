@@ -25,7 +25,7 @@ public class PersonajeService {
 	@Autowired
 	private PartidaService partidaService;
 
-	public Personaje getPersonajeFromToken(HttpServletRequest request, long id) {
+	public Personaje getPersonajeFromRequest(HttpServletRequest request, long id) {
 		User user = userService.datosAutenticado(request, id);
 		
 		return (user != null) ? user.getPersonaje() : null;
@@ -47,12 +47,13 @@ public class PersonajeService {
 	public Partida unirsePartida(Personaje personaje, String token) {
 		
 		Partida partida = partidaService.getPartidaByToken(token);
-		
 		partida.addPersonaje(personaje);
+		personaje.unirsePartida(partida);
 		
+		partidaService.savePartida(partida);
 		persoRepo.save(personaje);
 		
-		return partidaService.savePartida(partida);
+		return partidaService.getPartidaByToken(token);
 	}
 
 	public Partida obtenerPartida(Personaje personaje, String token) {
@@ -60,6 +61,27 @@ public class PersonajeService {
 		Partida partida = partidaService.getPartidaByToken(token);
 		
 		return (partida != null) ? partida : null;
+	}
+
+	public Boolean empezarPartida(String token) {
+		Partida partida = partidaService.getPartidaByToken(token);
+		boolean empezar = true;
+		
+		partida.getPersonajes().stream().allMatch(pj -> pj.getEmpezarPartida());
+		
+		// Aqui debemos hacer algo cuando empieza la partida, pero por ahora
+		// Solo devolvera un boolean.
+		
+		return empezar;
+	}
+
+	public Personaje setEstadoPersonaje(Personaje personaje, Boolean listo) {
+		
+		if (personaje.getPartida() != null && !personaje.getPartida().getIniciada()) {
+			personaje.setEmpezarPartida(listo);			
+		}
+		
+		return persoRepo.save(personaje);
 	}
 
 }

@@ -5,18 +5,37 @@ public class PersonajeDTO {
 	private Integer daño;
 	private Integer energia;
 	private Boolean vivo;
+	private Long id;
+	private Boolean empezarPartida;
 	
-	public PersonajeDTO(Integer vida, Integer daño, Integer energia, Boolean vivo) {
+	public PersonajeDTO(Long id, Integer vida, Integer daño, Integer energia, Boolean vivo, Boolean empezarPartida) {
 		super();
+		this.id = id;
 		this.vida = vida;
 		this.daño = daño;
 		this.energia = energia;
 		this.vivo = vivo;
+		this.empezarPartida = empezarPartida;
 	}
 
 	public PersonajeDTO() {
 		super();
 	}
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public Boolean getEmpezarPartida() {
+		return empezarPartida;
+	}
+	
+	public void setEmpezarPartida(Boolean empezarPartida) {
+		this.empezarPartida = empezarPartida;
+	}	
 
 	public Integer getVida() {
 		return vida;
@@ -49,5 +68,5 @@ public class PersonajeDTO {
 	public void setVivo(Boolean vivo) {
 		this.vivo = vivo;
 	}
-	
+
 }

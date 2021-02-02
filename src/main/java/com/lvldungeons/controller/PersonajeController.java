@@ -38,20 +38,15 @@ public class PersonajeController {
 		personaje = this.personajeService.getPersonajeFromRequest(request, id);
 		
 		if (personaje != null) {
-			if (!token.equals("") && listo.equals("")) {
+			if (datos.getToken() != null && datos.getListo() == null) {
 				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
-					GenerateDTOService.generatePartidaDTO(personajeService.unirsePartida(personaje, token))
+					GenerateDTOService.generatePartidaDTO(personajeService.unirsePartida(personaje, datos.getToken()))
 					);	
 		
-			} else if (!listo.equals("")) {
-				if (listo.equals("true") || listo.equals("false")) {
-					Boolean listoBool = Boolean.parseBoolean(listo);
-						response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
-								GenerateDTOService.generatePersonajeDTO(personajeService.setEstadoPersonaje(personaje, listoBool))
-								);
-				} else {
-					response = ResponseEntity.status(HttpStatus.ACCEPTED).body(errorService.generarError(4));
-				}
+			} else if (datos.getListo() != null) {
+					response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
+							GenerateDTOService.generatePersonajeDTO(personajeService.setEstadoPersonaje(personaje, datos.getListo()))
+							);
 			} else {
 				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
 						GenerateDTOService.generatePartidaDTO(personajeService.iniciarPartida(personaje))
@@ -64,7 +59,7 @@ public class PersonajeController {
 	}
 	
 
-	@PostMapping("/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<?> obtenerPartida(HttpServletRequest request, @PathVariable Long id, @RequestParam String token){
 		ResponseEntity<?> response;
 		Personaje personaje;
@@ -81,7 +76,7 @@ public class PersonajeController {
 		return response;
 	}
 	
-	@GetMapping("{id}/start/")
+	@PostMapping("{id}/start/")
 	public ResponseEntity<?> empezarPartida(HttpServletRequest request, @PathVariable Long id, @RequestParam String token){
 		ResponseEntity<?> response;
 		Personaje personaje;

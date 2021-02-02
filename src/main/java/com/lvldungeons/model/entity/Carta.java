@@ -2,6 +2,7 @@ package com.lvldungeons.model.entity;
 
 import java.sql.Blob;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,9 +24,13 @@ public class Carta extends AbstractEntity {
 	@Enumerated(EnumType.STRING)
 	private TipoCarta tipoCarta;
 	
-	private Baraja baraja;
-
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "personaje_id")	
 	private Personaje personaje;
+
+	
+	private Baraja baraja;
+	
 	
 	/*
 	 * Constructores

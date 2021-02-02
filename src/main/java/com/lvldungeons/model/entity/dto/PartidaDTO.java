@@ -11,16 +11,26 @@ public class PartidaDTO {
 	private String token;
 	private List<PersonajeDTO> personajes;
 	private Boolean iniciada;
+	private Long idOwner;
 	
-	public PartidaDTO(String token, Boolean iniciada, List<PersonajeDTO> personajes) {
+	public PartidaDTO(String token, Boolean iniciada, Long idOwner, List<PersonajeDTO> personajes) {
 		super();
 		this.token = token;
 		this.personajes = personajes;
 		this.iniciada = iniciada;
+		this.idOwner = idOwner;
 	}
 
 	public PartidaDTO() {
 		super();
+	}
+
+	public Boolean getIniciada() {
+		return iniciada;
+	}
+	
+	public void setIniciada(Boolean iniciada) {
+		this.iniciada = iniciada;
 	}
 
 	public String getToken() {
@@ -31,12 +41,13 @@ public class PartidaDTO {
 		this.token = token;
 	}
 
-	public Boolean getIniciada() {
-		return iniciada;
+
+	public Long getIdOwner() {
+		return idOwner;
 	}
-	
-	public void setIniciada(Boolean iniciada) {
-		this.iniciada = iniciada;
+
+	public void setIdOwner(Long idOwner) {
+		this.idOwner = idOwner;
 	}
 
 	public List<PersonajeDTO> getPersonajes() {

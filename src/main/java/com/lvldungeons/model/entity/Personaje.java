@@ -1,17 +1,14 @@
 package com.lvldungeons.model.entity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.lvldungeons.model.entity.base.AbstractEntity;
@@ -24,19 +21,18 @@ public class Personaje extends AbstractEntity {
 	/*
 	 * Constantes
 	 */
-	private static final Integer VIDA_INI = 3;  				//Vida inicial del personaje
+	private final Integer VIDA_INI = 3;  				//Vida inicial del personaje
 	private final Integer MAX_VIDA = 10;  			//Vida maxima del personaje
 	private final Integer MIN_VIDA = 0;				//Vida minima del personaje
 	private final Integer MAX_ENER = 10;				//Energia maxima del personaje
 	private final Integer MIN_ENER = 0;				//Energia minima del personaje
-	private static final Integer MAX_MANO_VIVO_FINAL = 5;	//Maximo de cartas en la mano al finalizar un turno.
 	
 	private Integer vida;
 	private Integer daño;
 	private Integer energia;
 	private Boolean vivo;
 
-	private Boolean empezarPartida;
+	private boolean empezarPartida = false;
 	
 	@OneToOne(mappedBy = "personaje")
 	private User usuario;
@@ -46,13 +42,11 @@ public class Personaje extends AbstractEntity {
     @JoinColumn(name = "partida_id")
     private Partida partida;
     
+    @OneToMany(mappedBy = "personaje", cascade=CascadeType.ALL)
+	private List<Carta> mano;
+	
     
-	
-    //@ElementCollection
-	//private List<Carta> mano;
-	
-	//@ElementCollection
-	//private Map<TipoEquipo, Carta> equipo;
+	private Map<TipoEquipo, Carta> equipo;
 
 	
 	
@@ -103,13 +97,13 @@ public class Personaje extends AbstractEntity {
 		this.daño = daño;
 	}
 	
-	/*public Integer calcularDaño() { 
+	public Integer calcularDaño() { 
 		this.equipo.entrySet().stream().filter(Objects::nonNull).forEach((equipo) -> {
 			this.daño = this.daño + equipo.getValue().getDaño();
 		});
 		return this.daño;
 	}
-*/
+
 	public Integer getEnergia() {
 		return energia;
 	}
@@ -135,11 +129,19 @@ public class Personaje extends AbstractEntity {
 	public void setVivo(Boolean vivo) {
 		this.vivo = vivo;
 	}
+	
+	public Boolean getEmpezarPartida() {
+		return empezarPartida;
+	}
+
+	public void setEmpezarPartida(Boolean empezarPartida) {
+		this.empezarPartida = empezarPartida;
+	}
 
 	public User getUsuario() {
 		return usuario;
 	}
-/*
+
 	public List<Carta> getMano() {
 		return mano;
 	}
@@ -163,13 +165,12 @@ public class Personaje extends AbstractEntity {
 	public void addEquipo(TipoEquipo tipo, Carta carta) {
 		this.equipo.replace(tipo, carta);
 	}
-*/
+	
 	public void reiniciarPersonaje() {
 		this.vida = VIDA_INI;
 		this.daño = VIDA_INI;
 		this.energia = MAX_ENER;
 		this.vivo = true;
-		this.empezarPartida = false;
 		
 		//this.mano = new ArrayList<Carta>();
 		
@@ -184,11 +185,5 @@ public class Personaje extends AbstractEntity {
 	*/
 	}
 
-	public Boolean getEmpezarPartida() {
-		return empezarPartida;
-	}
 
-	public void setEmpezarPartida(Boolean empezarPartida) {
-		this.empezarPartida = empezarPartida;
-	}
 }

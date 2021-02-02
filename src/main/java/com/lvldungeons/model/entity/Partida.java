@@ -21,8 +21,8 @@ public class Partida extends AbstractEntity {
 	
 	@Column(nullable = false, unique = true)
 	private String token;
-	private Boolean iniciada;
-	private Personaje owner;
+	private boolean iniciada;
+	private Long idOwner;
 	
     @OneToMany(mappedBy = "partida", cascade=CascadeType.ALL)
 	private List<Personaje> personajes;
@@ -32,6 +32,7 @@ public class Partida extends AbstractEntity {
 
     public Partida() {
     	super();
+    	this.iniciada = false;
 		this.token = UUID.randomUUID().toString().substring(0, 6);
 		/*this.barajas = new HashMap<TipoBaraja, Baraja>() {{
 			put(TipoBaraja.PUERTA, new Baraja());
@@ -48,7 +49,7 @@ public class Partida extends AbstractEntity {
 		this.personajes = new ArrayList<Personaje>() {{
 			add(personaje);
 		}};
-		this.owner = personaje;
+		this.idOwner = personaje.getId();
 	/*
 		this.barajas = new HashMap<TipoBaraja, Baraja>() {{
 			put(TipoBaraja.PUERTA, new Baraja());
@@ -59,16 +60,24 @@ public class Partida extends AbstractEntity {
 	*/
 	}
 
+	public Boolean getIniciada() {
+		return iniciada;
+	}
+	
+	public void setIniciada(Boolean iniciada) {
+		this.iniciada = iniciada;
+	}
+
 	public String getToken() {
 		return token;
 	}	
 	
-	public Personaje getOwner() {
-		return owner;
+	public Long getOwner() {
+		return this.idOwner;
 	}
 
-	public void setOwner(Personaje owner) {
-		this.owner = owner;
+	public void setOwner(Long idOwner) {
+		idOwner = this.idOwner;
 	}
 
 	public List<Personaje> getPersonajes() {
@@ -86,14 +95,5 @@ public class Partida extends AbstractEntity {
 	public void removePersonaje(Personaje personaje) {
 		this.personajes.remove(personaje);
 	}
-
-	public Boolean getIniciada() {
-		return iniciada;
-	}
-
-	public void setIniciada(Boolean iniciada) {
-		this.iniciada = iniciada;
-	}
-
 
 }

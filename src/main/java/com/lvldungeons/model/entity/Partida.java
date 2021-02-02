@@ -1,19 +1,18 @@
 package com.lvldungeons.model.entity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+import com.lvldungeons.model.entity.baraja.Descarte;
 import com.lvldungeons.model.entity.base.AbstractEntity;
-import com.lvldungeons.model.enumerate.TipoBaraja;
 
 @SuppressWarnings("serial")
 @Entity
@@ -27,9 +26,14 @@ public class Partida extends AbstractEntity {
     @OneToMany(mappedBy = "partida", cascade=CascadeType.ALL)
 	private List<Personaje> personajes;
 	
-    //@ElementCollection
-	//private Map<TipoBaraja, Baraja> barajas;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "descarte_id", referencedColumnName = "id")
+	private Descarte descarte;
+    //private Monstruo monstruo;
+    //private Puerta puerta;
+    //private Tesoro tesoro
+    //private MonstruoFinal monstruoFinal;
+        
     public Partida() {
     	super();
     	this.iniciada = false;
@@ -94,6 +98,14 @@ public class Partida extends AbstractEntity {
 */
 	public void removePersonaje(Personaje personaje) {
 		this.personajes.remove(personaje);
+	}
+
+	public Descarte getDescarte() {
+		return descarte;
+	}
+
+	public void setDescarte(Descarte descarte) {
+		this.descarte = descarte;
 	}
 
 }

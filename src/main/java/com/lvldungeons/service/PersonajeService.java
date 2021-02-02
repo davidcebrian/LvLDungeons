@@ -18,8 +18,7 @@ public class PersonajeService {
 	private PersonajeRepository persoRepo;
 
 	// Servicios
-	@Autowired
-	private UpdateService updateService;
+
 	@Autowired 
 	private UserService userService;
 	@Autowired

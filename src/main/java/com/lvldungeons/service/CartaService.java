@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lvldungeons.model.entity.Carta;
+import com.lvldungeons.model.entity.carta.Carta;
 import com.lvldungeons.model.repository.CartaRepository;
 
 @Service
@@ -15,12 +15,9 @@ public class CartaService {
 	@Autowired
 	private CartaRepository cartaRepo;
 
-	// Servicios
-	@Autowired
-	private UpdateService updateService;
 
 	// Get de todas las barajas
-	public List<Carta> getEntity() {
+	public List<Carta> getEntities() {
 		return (List<Carta>) cartaRepo.findAll();
 	}
 
@@ -39,7 +36,7 @@ public class CartaService {
 		Carta us = cartaRepo.findById(id).get();
 
 		if (us != null) {
-			updateService.updateCarta(us, sent);
+			//updateService.updateCarta(us, sent);
 			cartaRepo.save(us);
 		}
 		return us;

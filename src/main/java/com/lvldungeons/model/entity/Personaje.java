@@ -1,8 +1,6 @@
 package com.lvldungeons.model.entity;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,7 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.lvldungeons.model.entity.base.AbstractEntity;
-import com.lvldungeons.model.enumerate.TipoEquipo;
+import com.lvldungeons.model.entity.carta.Carta;
+import com.lvldungeons.model.entity.carta.Equipo;
 
 @SuppressWarnings("serial")
 @Entity
@@ -45,10 +44,8 @@ public class Personaje extends AbstractEntity {
     @OneToMany(mappedBy = "personaje", cascade=CascadeType.ALL)
 	private List<Carta> mano;
 	
-    
-	private Map<TipoEquipo, Carta> equipo;
-
-	
+    @OneToMany(mappedBy = "personaje", cascade=CascadeType.ALL)
+    private List<Equipo> equipo;
 	
 	/*
 	 * Constructores
@@ -97,13 +94,13 @@ public class Personaje extends AbstractEntity {
 		this.daño = daño;
 	}
 	
-	public Integer calcularDaño() { 
+	/*public Integer calcularDaño() { 
 		this.equipo.entrySet().stream().filter(Objects::nonNull).forEach((equipo) -> {
 			this.daño = this.daño + equipo.getValue().getDaño();
 		});
 		return this.daño;
 	}
-
+*/
 	public Integer getEnergia() {
 		return energia;
 	}
@@ -142,7 +139,7 @@ public class Personaje extends AbstractEntity {
 		return usuario;
 	}
 
-	public List<Carta> getMano() {
+	/*public List<Carta> getMano() {
 		return mano;
 	}
 
@@ -153,19 +150,7 @@ public class Personaje extends AbstractEntity {
 	public void addCarta(List<Carta> cartas) {
 		this.mano.addAll(cartas);
 	}
-	
-	public Map<TipoEquipo, Carta> getEquipo() {
-		return equipo;
-	}
-	
-	public void eliminarEquipo(TipoEquipo tipo) {
-		this.equipo.replace(tipo, null);
-	}
-	
-	public void addEquipo(TipoEquipo tipo, Carta carta) {
-		this.equipo.replace(tipo, carta);
-	}
-	
+	*/
 	public void reiniciarPersonaje() {
 		this.vida = VIDA_INI;
 		this.daño = VIDA_INI;
@@ -183,6 +168,22 @@ public class Personaje extends AbstractEntity {
 			put(TipoEquipo.BOTAS, null);
 		}};
 	*/
+	}
+
+	public List<Carta> getMano() {
+		return mano;
+	}
+
+	public void setMano(List<Carta> mano) {
+		this.mano = mano;
+	}
+
+	public List<Equipo> getEquipo() {
+		return equipo;
+	}
+
+	public void setEquipo(List<Equipo> equipo) {
+		this.equipo = equipo;
 	}
 
 

@@ -20,8 +20,6 @@ public class UserService {
 	private UserRepository userRepo;
 
 	// Servicios
-	@Autowired
-	private UpdateService updateService;
 
 	private ObjectMapper mapper = new ObjectMapper();
 
@@ -64,15 +62,5 @@ public class UserService {
 		return user;
 	}
 
-	// Actualziar un user autenticado
-	public User updateEntityAut(HttpServletRequest request, User sent) {
-		long id = AuthJWT.getIdUserDesdeRequest(request);
-		User us = userRepo.findById(id).get();
-
-		if (us != null) {
-			updateService.updateUser(us, sent);
-			userRepo.save(us);
-		}
-		return us;
-	}
+	
 }

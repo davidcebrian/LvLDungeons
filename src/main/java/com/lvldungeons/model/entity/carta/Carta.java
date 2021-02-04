@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -16,6 +18,7 @@ import com.lvldungeons.model.enumerate.TipoCarta;
 
 @SuppressWarnings("serial")
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Carta extends AbstractEntity {
 
 	private String nombre;

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,6 +15,7 @@ import com.lvldungeons.model.entity.carta.Carta;
 
 @SuppressWarnings("serial")
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Baraja extends AbstractEntity {
 	
 	private final Integer MIN_CARTAS = 0;	

@@ -1,9 +1,13 @@
 package com.lvldungeons.model.entity.baraja;
 
+import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 import com.lvldungeons.model.entity.Partida;
 
+
+@SuppressWarnings("serial")
+@Entity
 public class Tesoro extends Baraja {
 
 	@OneToOne(mappedBy = "puerda")

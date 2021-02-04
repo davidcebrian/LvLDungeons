@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lvldungeons.model.entity.carta.Carta;
+import com.lvldungeons.model.entity.dto.CartaDTO;
 import com.lvldungeons.service.CartaService;
 
 
@@ -41,7 +42,7 @@ public class CartaController {
 	}
 	
 	@PostMapping("/group")
-	public ResponseEntity saveCards(@RequestBody List<Carta> cartas) {
+	public ResponseEntity saveCards(@RequestBody List<CartaDTO> cartas) {
 		ResponseEntity<?> response;
 		if(cartas.isEmpty()) {
 			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("NO HAS INTRODUCIDO CARTAS");

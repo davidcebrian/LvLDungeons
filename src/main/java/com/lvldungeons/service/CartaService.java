@@ -30,6 +30,12 @@ public class CartaService {
 	public Carta saveEntity(Carta sent) {
 		return cartaRepo.save(sent);
 	}
+	
+	//Crear varias cartas
+	public List<Carta> saveEntities(List<Carta> sent){
+		sent.stream().forEach((c) -> this.saveEntity(c));
+		return sent;
+	}
 
 	// Actualizar una Carta
 	public Carta updateEntity(Long id, Carta sent) {

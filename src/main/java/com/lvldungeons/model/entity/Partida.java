@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.lvldungeons.model.entity.baraja.Descarte;
+import com.lvldungeons.model.entity.baraja.MonstruoFinal;
+import com.lvldungeons.model.entity.baraja.Puerta;
+import com.lvldungeons.model.entity.baraja.Tesoro;
 import com.lvldungeons.model.entity.base.AbstractEntity;
 
 @SuppressWarnings("serial")
@@ -29,22 +32,21 @@ public class Partida extends AbstractEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "descarte_id", referencedColumnName = "id")
 	private Descarte descarte;
-    //private Monstruo monstruo;
-    //private Puerta puerta;
-    //private Tesoro tesoro
-    //private MonstruoFinal monstruoFinal;
-        
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "monstruo_final_id", referencedColumnName = "id")
+    private MonstruoFinal monstruoFinal;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "puerta_id", referencedColumnName = "id")
+    private Puerta puerta;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tesoro_id", referencedColumnName = "id")
+    private Tesoro tesoro;
+    
     public Partida() {
     	super();
     	this.iniciada = false;
 		this.token = UUID.randomUUID().toString().substring(0, 6);
-		/*this.barajas = new HashMap<TipoBaraja, Baraja>() {{
-			put(TipoBaraja.PUERTA, new Baraja());
-			put(TipoBaraja.RECOMPENSA, new Baraja());
-			put(TipoBaraja.MONSTRUOS_EPICOS, new Baraja());
-			put(TipoBaraja.DESCARTE, new Baraja());
-		}};
-		*/
+
     }
     
 	public Partida(Personaje personaje) {
@@ -54,14 +56,6 @@ public class Partida extends AbstractEntity {
 			add(personaje);
 		}};
 		this.idOwner = personaje.getId();
-	/*
-		this.barajas = new HashMap<TipoBaraja, Baraja>() {{
-			put(TipoBaraja.PUERTA, new Baraja());
-			put(TipoBaraja.RECOMPENSA, new Baraja());
-			put(TipoBaraja.MONSTRUOS_EPICOS, new Baraja());
-			put(TipoBaraja.DESCARTE, new Baraja());
-		}};
-	*/
 	}
 
 	public Boolean getIniciada() {
@@ -91,11 +85,7 @@ public class Partida extends AbstractEntity {
 	public void addPersonaje(Personaje personaje) {
 		this.personajes.add(personaje);
 	}
-/*
-	public Map<TipoBaraja, Baraja> getBarajas() {
-		return barajas;
-	}
-*/
+
 	public void removePersonaje(Personaje personaje) {
 		this.personajes.remove(personaje);
 	}

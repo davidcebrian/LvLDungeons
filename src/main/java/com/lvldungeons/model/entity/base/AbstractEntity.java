@@ -12,7 +12,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class AbstractEntity implements Serializable {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
 	private LocalDate fechaCreacion;

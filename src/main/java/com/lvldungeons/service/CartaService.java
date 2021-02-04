@@ -1,12 +1,17 @@
 package com.lvldungeons.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lvldungeons.model.entity.carta.Carta;
+import com.lvldungeons.model.entity.carta.Equipo;
+import com.lvldungeons.model.entity.dto.CartaDTO;
+import com.lvldungeons.model.enumerate.TipoCarta;
 import com.lvldungeons.model.repository.CartaRepository;
+import com.lvldungeons.model.repository.EquipoRepository;
 
 @Service
 public class CartaService {
@@ -14,7 +19,8 @@ public class CartaService {
 	// Repositorios
 	@Autowired
 	private CartaRepository cartaRepo;
-
+	@Autowired
+	private EquipoRepository equipoRepo;
 
 	// Get de todas las barajas
 	public List<Carta> getEntities() {
@@ -32,9 +38,20 @@ public class CartaService {
 	}
 	
 	//Crear varias cartas
-	public List<Carta> saveEntities(List<Carta> sent){
-		sent.stream().forEach((c) -> this.saveEntity(c));
-		return sent;
+	public List<Carta> saveEntities(List<CartaDTO> sent){
+		List<Carta> cartas = new ArrayList<Carta>();
+		List<Equipo> equipos = new ArrayList<Equipo>();
+		sent.stream().forEach((c) -> {
+			if(c.getTipo() != TipoCarta.EQUIPO) {
+				cartas.add(GenerateDTOService.generateCartaDTO(c));
+			}else {
+				equipos.add((Equipo) GenerateDTOService.generateCartaDTO(c));
+			}
+		});
+		cartaRepo.saveAll(cartas);
+		equipoRepo.saveAll(equipos);
+		cartas.addAll(equipos);
+		return cartas;
 	}
 
 	// Actualizar una Carta

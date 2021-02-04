@@ -15,7 +15,7 @@ import com.lvldungeons.model.entity.carta.Carta;
 
 @SuppressWarnings("serial")
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Baraja extends AbstractEntity {
 	
 	private final Integer MIN_CARTAS = 0;	

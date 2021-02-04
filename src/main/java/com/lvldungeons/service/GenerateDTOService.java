@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import com.lvldungeons.model.entity.Partida;
 import com.lvldungeons.model.entity.Personaje;
 import com.lvldungeons.model.entity.User;
+import com.lvldungeons.model.entity.carta.Carta;
+import com.lvldungeons.model.entity.carta.Equipo;
+import com.lvldungeons.model.entity.dto.CartaDTO;
 import com.lvldungeons.model.entity.dto.PartidaDTO;
 import com.lvldungeons.model.entity.dto.PersonajeDTO;
 import com.lvldungeons.model.entity.dto.UserDTO;
@@ -52,5 +55,15 @@ public class GenerateDTOService {
 		PersonajeDTO personajeDTO = new PersonajeDTO(pj.getId(), pj.getVida(), pj.getDaño(), pj.getEnergia(), pj.getVivo(), pj.getEmpezarPartida());
 
 		return personajeDTO;
+	}
+	
+	public static Carta generateCartaDTO(CartaDTO cartaDTO) {
+		if(cartaDTO.getTipoEquipo() != null) {
+			Equipo equipo = new Equipo(cartaDTO);
+			return equipo;
+		}else {
+			Carta carta = new Carta(cartaDTO);
+			return carta;
+		}
 	}
 }

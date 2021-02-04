@@ -14,13 +14,14 @@ import javax.persistence.ManyToOne;
 import com.lvldungeons.model.entity.Personaje;
 import com.lvldungeons.model.entity.baraja.Baraja;
 import com.lvldungeons.model.entity.base.AbstractEntity;
+import com.lvldungeons.model.entity.dto.CartaDTO;
 import com.lvldungeons.model.enumerate.TipoCarta;
 
 @SuppressWarnings("serial")
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Carta extends AbstractEntity {
-
+	
 	private String nombre;
 	private Blob diseño;
 	private String descripcion;
@@ -39,6 +40,15 @@ public class Carta extends AbstractEntity {
 
 	public Carta() {
 		super();
+	}
+	
+	public Carta(CartaDTO cartaDto) {
+		super();
+		this.setNombre(cartaDto.getNombre());
+		this.setDescripcion(cartaDto.getDescripcion());
+		this.setValor(cartaDto.getValor());
+		this.setDiseño(cartaDto.getDiseño());
+		this.setTipo(cartaDto.getTipo());
 	}
 
 	public String getNombre() {

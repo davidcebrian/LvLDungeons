@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.lvldungeons.model.entity.User;
-import com.lvldungeons.model.entity.dto.UserDTO;
 import com.lvldungeons.service.GenerateDTOService;
 import com.lvldungeons.service.UserService;
 import com.lvldungeons.service.Error.ManejoErrores;

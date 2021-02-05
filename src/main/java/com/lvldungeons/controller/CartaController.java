@@ -23,14 +23,26 @@ public class CartaController {
 	@Autowired
 	private CartaService cService;
 	
+	/*
+	 * Metodos provisionales para realizar pruebas con las distitas cartas.
+	 * 
+	 */
+	
+	/*
+	 * Obtener todas las cartas
+	 */
 	@GetMapping("/all")
-	public ResponseEntity getAll() {
+	public ResponseEntity<?> getAll() {
 		List<Carta> cartas = cService.getEntities();
 		return ResponseEntity.status(HttpStatus.OK).body(cartas);
 	}
 	
+
+	/*
+	 * Guardar una Carta
+	 */
 	@PostMapping()
-	public ResponseEntity saveCard(@RequestBody Carta carta) {
+	public ResponseEntity<?> saveCard(@RequestBody Carta carta) {
 		ResponseEntity<?> response;
 		if(carta == null) {
 			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("NO HAS INTRODUCIDO CARTA");
@@ -41,8 +53,12 @@ public class CartaController {
 		return response;
 	}
 	
+
+	/*
+	 * Guardar todas las cartas
+	 */
 	@PostMapping("/group")
-	public ResponseEntity saveCards(@RequestBody List<CartaDTO> cartas) {
+	public ResponseEntity<?> saveCards(@RequestBody List<CartaDTO> cartas) {
 		ResponseEntity<?> response;
 		if(cartas.isEmpty()) {
 			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("NO HAS INTRODUCIDO CARTAS");

@@ -26,6 +26,9 @@ public class Personaje extends AbstractEntity {
 	private final Integer MAX_ENER = 10;				//Energia maxima del personaje
 	private final Integer MIN_ENER = 0;				//Energia minima del personaje
 	
+	/*
+	 * Vars
+	 */
 	private Integer vida;
 	private Integer daño;
 	private Integer energia;
@@ -33,6 +36,9 @@ public class Personaje extends AbstractEntity {
 
 	private boolean empezarPartida = false;
 	
+	/*
+	 * Usuario que maneja al personaje
+	 */
 	@OneToOne(mappedBy = "personaje")
 	private User usuario;
     
@@ -40,6 +46,7 @@ public class Personaje extends AbstractEntity {
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "partida_id")
     private Partida partida;
+    
     
     @OneToMany(mappedBy = "personaje", cascade=CascadeType.ALL)
 	private List<Carta> mano;
@@ -61,21 +68,13 @@ public class Personaje extends AbstractEntity {
 		this.reiniciarPersonaje();
 	}
 
+	/*
+	 * Getters y Setters
+	 */
 	public Partida getPartida() {
 		return this.partida;
 	}
 	
-	public Partida iniciarPartida() {
-		this.partida = new Partida(this);
-		
-		return this.partida;
-	}
-	
-	public void unirsePartida(Partida partida) {
-		this.partida = partida;
-		partida.addPersonaje(this);
-	}
-
 	public Integer getVida() {
 		return vida;
 	}
@@ -94,13 +93,6 @@ public class Personaje extends AbstractEntity {
 		this.daño = daño;
 	}
 	
-	/*public Integer calcularDaño() { 
-		this.equipo.entrySet().stream().filter(Objects::nonNull).forEach((equipo) -> {
-			this.daño = this.daño + equipo.getValue().getDaño();
-		});
-		return this.daño;
-	}
-*/
 	public Integer getEnergia() {
 		return energia;
 	}
@@ -109,14 +101,6 @@ public class Personaje extends AbstractEntity {
 		if (energia < this.MAX_ENER && energia > this.MIN_ENER) {
 			this.energia = energia;			
 		}
-	}
-	
-	public Integer reduceEnergia() {
-		if (this.energia > this.MIN_ENER) {
-			this.energia--;
-		}
-		
-		return this.energia;
 	}
 
 	public Boolean getVivo() {
@@ -139,37 +123,6 @@ public class Personaje extends AbstractEntity {
 		return usuario;
 	}
 
-	/*public List<Carta> getMano() {
-		return mano;
-	}
-
-	public void elminarCartasMano(List<Carta> cartas) {
-		this.mano.removeAll(cartas);
-	}
-	
-	public void addCarta(List<Carta> cartas) {
-		this.mano.addAll(cartas);
-	}
-	*/
-	public void reiniciarPersonaje() {
-		this.vida = VIDA_INI;
-		this.daño = VIDA_INI;
-		this.energia = MAX_ENER;
-		this.vivo = true;
-		
-		//this.mano = new ArrayList<Carta>();
-		
-		/*this.equipo = new HashMap<TipoEquipo, Carta>() {{
-			put(TipoEquipo.ARMA_PRINCIPAL, null);
-			put(TipoEquipo.ARMA_SECUNDARIA, null);
-			put(TipoEquipo.CASCO, null);
-			put(TipoEquipo.PETO, null);
-			put(TipoEquipo.GREBAS, null);
-			put(TipoEquipo.BOTAS, null);
-		}};
-	*/
-	}
-
 	public List<Carta> getMano() {
 		return mano;
 	}
@@ -185,6 +138,36 @@ public class Personaje extends AbstractEntity {
 	public void setEquipo(List<Equipo> equipo) {
 		this.equipo = equipo;
 	}
-
+	
+	/*
+	 * Logica
+	 */
+	
+	public void reiniciarPersonaje() {
+		this.vida = VIDA_INI;
+		this.daño = VIDA_INI;
+		this.energia = MAX_ENER;
+		this.vivo = true;
+		
+	}
+	
+	public Partida iniciarPartida() {
+		this.partida = new Partida(this);
+		
+		return this.partida;
+	}
+	
+	public void unirsePartida(Partida partida) {
+		this.partida = partida;
+		partida.addPersonaje(this);
+	}
+	
+	public Integer reduceEnergia() {
+		if (this.energia > this.MIN_ENER) {
+			this.energia--;
+		}
+		
+		return this.energia;
+	}
 
 }

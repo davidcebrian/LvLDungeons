@@ -1,9 +1,11 @@
 package com.lvldungeons.model.entity.dto;
 
-import javax.persistence.Column;
-
 public class UserDTO {
-
+	/*
+	 * Enviar informacion filtrada del usuario desde el backend
+	 */
+	
+	
 	private String nombre;
 	private Integer edad;
 	private String email;
@@ -11,6 +13,9 @@ public class UserDTO {
 	
 	private PersonajeDTO personaje;
 
+	/*
+	 * Constructores
+	 */
 	public UserDTO(String nombre, Integer edad, String email, String username, PersonajeDTO personaje) {
 		super();
 		this.nombre = nombre;
@@ -31,6 +36,9 @@ public class UserDTO {
 		super();
 	}
 
+	/*
+	 * Getters y Setters
+	 */
 	public String getNombre() {
 		return nombre;
 	}

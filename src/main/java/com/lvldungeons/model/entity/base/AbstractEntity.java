@@ -10,6 +10,12 @@ import javax.persistence.MappedSuperclass;
 @SuppressWarnings("serial")
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
+	/*
+	 * Entidad padre de todas las demas entidades, en esta entidad genero el id para cada otra entidad
+	 * 
+	 * Ademas de las fechas de creacion, modificacion y eliminacion "logica".
+	 */
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -19,11 +25,17 @@ public abstract class AbstractEntity implements Serializable {
 	private LocalDate fechaModificacion;
 	private LocalDate fechaEliminacion;
 	
+	/*
+	 * Constructor
+	 */
 	public AbstractEntity() {
 		super();
 		this.fechaCreacion = LocalDate.now();
 	}
 
+	/*
+	 * Getters y Setters
+	 */
 	public Long getId() {
 		return id;
 	}

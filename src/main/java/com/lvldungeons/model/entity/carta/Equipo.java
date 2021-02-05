@@ -14,6 +14,10 @@ import com.lvldungeons.model.enumerate.TipoEquipo;
 @SuppressWarnings("serial")
 @Entity
 public class Equipo extends Carta {
+	/*
+	 * Hereda de carta, tiene la propiedad de tener un tipo unico y una relacion con personaje distinta a la de carta.
+	 */
+	
 	@Enumerated(EnumType.STRING)
 	private TipoEquipo tipoEquipo;
 	
@@ -21,6 +25,9 @@ public class Equipo extends Carta {
     @JoinColumn(name = "personaje_id")
 	private Personaje personaje;
 
+	/*
+	 * Constructores
+	 */
 	public Equipo() {
 		super();	
 	}
@@ -35,6 +42,9 @@ public class Equipo extends Carta {
 		this.setTipoEquipo(cartaDto.getTipoEquipo());
 	}
 
+	/*
+	 * Getters y Setters
+	 */
 	public TipoEquipo getTipoEquipo() {
 		return tipoEquipo;
 	}

@@ -18,6 +18,9 @@ import com.lvldungeons.model.entity.dto.UserDTO;
 @Service
 public class GenerateDTOService {
 
+	/*
+	 * Generar UserDTO desde un User
+	 */
 	public static UserDTO generateUserDTO(User postUser) {
 		
 		Personaje pj = postUser.getPersonaje();
@@ -30,6 +33,10 @@ public class GenerateDTOService {
 
 		return userDTO;
 	}
+	
+	/*
+	 * Generar PartidaDTO desde una Partida
+	 */
 	public static PartidaDTO generatePartidaDTO(Partida postPartida) {
 		
 		List<Personaje> personajes = postPartida.getPersonajes();
@@ -43,20 +50,25 @@ public class GenerateDTOService {
 			pj = personajes.get(i);
 			pjDTO = generatePersonajeDTO(pj);
 			personajesDTO.add(pjDTO);
-		}
-		
-		
+		}	
 		PartidaDTO partidaDTO = new PartidaDTO(postPartida.getToken(), postPartida.getIniciada(), personajes.get(0).getId(), personajesDTO);
 		
 		return partidaDTO;
 	}
 	
+	/*
+	 * Generar PersonajeDTO desde un Personaje
+	 */
 	public static PersonajeDTO generatePersonajeDTO(Personaje pj) {
 		PersonajeDTO personajeDTO = new PersonajeDTO(pj.getId(), pj.getVida(), pj.getDaño(), pj.getEnergia(), pj.getVivo(), pj.getEmpezarPartida());
 
 		return personajeDTO;
 	}
 	
+	
+	/*
+	 * Generar CartaDTO desde una carta
+	 */
 	public static Carta generateCartaDTO(CartaDTO cartaDTO) {
 		if(cartaDTO.getTipoEquipo() != null) {
 			Equipo equipo = new Equipo(cartaDTO);

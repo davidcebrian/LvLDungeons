@@ -8,7 +8,10 @@ import com.lvldungeons.model.entity.Partida;
 @SuppressWarnings("serial")
 @Entity
 public class Descarte extends Baraja {
-
+	/*
+	 * La baraja de descarte tiene una coleccion de cartas que crece infinitamente donde se guardan las cartas ya usada.
+	 */
+	
 	private final Integer CARTAS_INICIAL = super.getMIN_CARTAS();
 
 	private Integer cantidad;
@@ -16,6 +19,9 @@ public class Descarte extends Baraja {
 	@OneToOne(mappedBy = "descarte")
 	private Partida partida;
 	
+	/*
+	 * Constructores
+	 */
 	public Descarte(Integer cantidad) {
 		super();
 		this.cantidad = cantidad;
@@ -25,6 +31,9 @@ public class Descarte extends Baraja {
 		super();
 	}
 
+	/*
+	 * Getters y Setters
+	 */
 	public Integer getCantidad() {
 		return cantidad;
 	}

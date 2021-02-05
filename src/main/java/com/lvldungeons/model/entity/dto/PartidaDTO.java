@@ -8,11 +8,18 @@ import javax.persistence.OneToMany;
 import com.lvldungeons.model.entity.Personaje;
 
 public class PartidaDTO {
+	/*
+	 * Enviar informacion filtrada de la partida desde el backend
+	 */
+	
 	private String token;
 	private List<PersonajeDTO> personajes;
 	private Boolean iniciada;
 	private Long idOwner;
 	
+	/*
+	 * Constructores
+	 */
 	public PartidaDTO(String token, Boolean iniciada, Long idOwner, List<PersonajeDTO> personajes) {
 		super();
 		this.token = token;
@@ -25,6 +32,9 @@ public class PartidaDTO {
 		super();
 	}
 
+	/*
+	 * Getters y Setters
+	 */
 	public Boolean getIniciada() {
 		return iniciada;
 	}

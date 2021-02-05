@@ -6,6 +6,9 @@ import com.lvldungeons.model.enumerate.TipoCarta;
 import com.lvldungeons.model.enumerate.TipoEquipo;
 
 public class CartaDTO {
+	/*
+	 * DTO que recibe una carta y la transforma en un Equipo o en una Carta, dependiendo del tipoEquipo.
+	 */
 	
 	private String nombre;
 	private Blob diseño;
@@ -13,13 +16,19 @@ public class CartaDTO {
 	private Integer valor;
 	private TipoCarta tipo;
 	
-	private TipoEquipo tipoEquipo;
+	private TipoEquipo tipoEquipo; // Solo existira si es de tipo Equipo.
 
 	
+	/*
+	 * Constructor
+	 */
 	public CartaDTO() {
 		super();
 	}
 
+	/*
+	 * Getters y Setters
+	 */
 	public String getNombre() {
 		return nombre;
 	}

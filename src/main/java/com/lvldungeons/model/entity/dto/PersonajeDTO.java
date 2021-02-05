@@ -1,6 +1,10 @@
 package com.lvldungeons.model.entity.dto;
 
 public class PersonajeDTO {
+	/*
+	 * Enviar informacion filtrada de Personaje desde el Backend
+	 */
+	
 	private Integer vida;
 	private Integer daño;
 	private Integer energia;
@@ -8,6 +12,9 @@ public class PersonajeDTO {
 	private Long id;
 	private Boolean empezarPartida;
 	
+	/*
+	 * Constructores
+	 */
 	public PersonajeDTO(Long id, Integer vida, Integer daño, Integer energia, Boolean vivo, Boolean empezarPartida) {
 		super();
 		this.id = id;
@@ -18,6 +25,9 @@ public class PersonajeDTO {
 		this.empezarPartida = empezarPartida;
 	}
 
+	/*
+	 * Getters y Setters
+	 */
 	public PersonajeDTO() {
 		super();
 	}

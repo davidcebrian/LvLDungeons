@@ -9,10 +9,16 @@ import com.lvldungeons.model.entity.Partida;
 @SuppressWarnings("serial")
 @Entity
 public class Tesoro extends Baraja {
-
-	@OneToOne(mappedBy = "puerda")
+	/*
+	 * La baraja de tesoro solo tiene cartas de tipo Equipo, Se abrirá solo despues de haber derrotado a un monstruo
+	 */
+	
+	@OneToOne(mappedBy = "tesoro")
 	private Partida partida;
 
+	/*
+	 * Constructor
+	 */
 	public Tesoro() {
 		super();
 	}
@@ -22,6 +28,9 @@ public class Tesoro extends Baraja {
 		this.partida = partida;
 	}
 
+	/*
+	 * Getters y Setters
+	 */
 	public Partida getPartida() {
 		return partida;
 	}

@@ -17,6 +17,14 @@ import com.lvldungeons.model.entity.carta.Carta;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Baraja extends AbstractEntity {
+	/*
+	 * Clase padre de los distintos tipos de baraja:
+	 * 
+	 * - Descarte
+	 * - MonstruoFinal
+	 * - Puerta
+	 * - Tesoro
+	 */
 	
 	private final Integer MIN_CARTAS = 0;	
 	private String nombre;
@@ -26,10 +34,17 @@ public class Baraja extends AbstractEntity {
     @JsonIgnore
 	private List<Carta> cartas = new ArrayList<Carta> ();
 	
+    
+    /*
+     * Constructores
+     */
 	public Baraja() {
 		super();
 	}
 
+	/*
+	 * Getters y Setters
+	 */
 	public String getNombre() {
 		return nombre;
 	}

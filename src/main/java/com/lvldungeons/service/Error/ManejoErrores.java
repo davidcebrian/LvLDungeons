@@ -24,6 +24,8 @@ public class ManejoErrores {
 	 * 
 	 * Recibe un codigo de error, y devuelve un JSON con el codigo enviado y un mensaje predefinido.
 	 * 
+	 * !! Importante. Este metodo desaparecera proximamente.
+	 * @deprecated
 	 * @param Integer error 
 	 * @return JSON
 	 */
@@ -34,10 +36,8 @@ public class ManejoErrores {
 
 		if (error == 1) {
 			((ObjectNode) errorJSON).put("mensaje", "Se ha realizado una peticion incorrecta");				
-
 		} else if (error == 2) {
 			((ObjectNode) errorJSON).put("mensaje", "Ya existe el nickname o email");				
-
 		} else if (error == 3) {
 			((ObjectNode) errorJSON).put("mensaje", "Usuario o contraseña incorrecta");				
 		} else if (error == 4) {

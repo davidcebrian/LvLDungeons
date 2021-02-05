@@ -20,24 +20,41 @@ import com.lvldungeons.model.entity.base.AbstractEntity;
 @SuppressWarnings("serial")
 @Entity
 public class Partida extends AbstractEntity {
+	/*
+	 * Entidad central del juego, desde donde se controla toda la partida.
+	 */
+	
 	
 	@Column(nullable = false, unique = true)
-	private String token;
-	private boolean iniciada;
-	private Long idOwner;
+	private String token;  // Token identificador de la partida desde fuera del backend.
 	
+	private boolean iniciada;
+	private Long idOwner;  // ID del dueño de la partida.
+	
+	/*
+	 * Persoajes que juegan esta partida.
+	 */
     @OneToMany(mappedBy = "partida", cascade=CascadeType.ALL)
 	private List<Personaje> personajes;
 	
+    /*
+     * Todas las barajas necesarias
+     */
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "descarte_id", referencedColumnName = "id")
 	private Descarte descarte;
+    
+    
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "monstruo_final_id", referencedColumnName = "id")
     private MonstruoFinal monstruoFinal;
+    
+    
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "puerta_id", referencedColumnName = "id")
     private Puerta puerta;
+    
+    
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tesoro_id", referencedColumnName = "id")
     private Tesoro tesoro;

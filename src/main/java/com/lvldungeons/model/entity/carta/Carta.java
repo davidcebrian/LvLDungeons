@@ -19,13 +19,13 @@ import com.lvldungeons.model.enumerate.TipoCarta;
 
 @SuppressWarnings("serial")
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED) // Crea entidades distintas por cada tabla, relacionadas con el padre.
 public class Carta extends AbstractEntity {
-	
-	private String nombre;
-	private Blob diseño;
-	private String descripcion;
-	private Integer valor;
+
+	private String nombre;			
+	private Blob diseño;			// Imagen de la carta
+	private String descripcion;		
+	private Integer valor;			// Valor puede tomar varias funciones, como stamina, daño, vida, etc...
 	
 	@Enumerated(EnumType.STRING)
 	private TipoCarta tipo;
@@ -38,6 +38,10 @@ public class Carta extends AbstractEntity {
     @JoinColumn(name = "baraja_id")
 	private Baraja baraja;	
 
+	
+	/*
+	 * Constructores
+	 */
 	public Carta() {
 		super();
 	}
@@ -51,6 +55,9 @@ public class Carta extends AbstractEntity {
 		this.setTipo(cartaDto.getTipo());
 	}
 
+	/*
+	 * Getters y Setters
+	 */
 	public String getNombre() {
 		return nombre;
 	}

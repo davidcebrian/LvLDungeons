@@ -24,12 +24,14 @@ public class PersonajeService {
 	@Autowired
 	private PartidaService partidaService;
 
+	//Obten un personaje
 	public Personaje getPersonajeFromRequest(HttpServletRequest request, long id) {
 		User user = userService.datosAutenticado(request, id);
 		
 		return (user != null) ? user.getPersonaje() : null;
 	}
 	
+	// Iniciar una partida
 	public Partida iniciarPartida(Personaje personaje) {
 		Partida partida;
 		if (personaje.getPartida() != null) {
@@ -42,7 +44,8 @@ public class PersonajeService {
 		
 		return partida;
 	}
-
+	
+	// Unirse a una partida
 	public Partida unirsePartida(Personaje personaje, String token) {
 		
 		Partida partida = partidaService.getPartidaByToken(token);
@@ -55,6 +58,7 @@ public class PersonajeService {
 		return partidaService.getPartidaByToken(token);
 	}
 
+	// Get una partida
 	public Partida obtenerPartida(Personaje personaje, String token) {
 		
 		Partida partida = partidaService.getPartidaByToken(token);
@@ -62,6 +66,8 @@ public class PersonajeService {
 		return (partida != null) ? partida : null;
 	}
 
+	
+	// Empezar la partida cuando todos los jugadores esten listos
 	public Boolean empezarPartida(String token) {
 		Partida partida = partidaService.getPartidaByToken(token);
 		boolean empezar = true;
@@ -74,6 +80,7 @@ public class PersonajeService {
 		return empezar;
 	}
 
+	//Cambiar estado del personaje.
 	public Personaje setEstadoPersonaje(Personaje personaje, Boolean listo) {
 		
 		if (personaje.getPartida() != null && !personaje.getPartida().getIniciada()) {

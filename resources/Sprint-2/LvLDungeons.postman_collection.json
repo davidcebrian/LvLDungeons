@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "ebb7d2d3-1aec-41e8-b9ac-5bfad48237e6",
+		"name": "LvLDungeons",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre\": \"nombre\",\n\t\"email\": \"email@example.com\",\n\t\"username\": \"nombre\",\n\t\"password\": \"nombre\",\n\t\"edad\": 1234\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/user?username=nombre&password=nombre",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "nombre"
+								},
+								{
+									"key": "password",
+									"value": "nombre"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Personaje",
+			"item": [
+				{
+					"name": "Crear Partida",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.j19e3iZBHunqXAwxdzvLA4AuCCrNOWRw2Q5DZw5PcbTtAAU7joT5QM0W0TORkn4Kj2NL0aVfOSrsuU3Laagk-Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/personaje/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personaje",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unirse Partida",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.j19e3iZBHunqXAwxdzvLA4AuCCrNOWRw2Q5DZw5PcbTtAAU7joT5QM0W0TORkn4Kj2NL0aVfOSrsuU3Laagk-Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"token\": \"936bff\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/personaje/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personaje",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Listo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.j19e3iZBHunqXAwxdzvLA4AuCCrNOWRw2Q5DZw5PcbTtAAU7joT5QM0W0TORkn4Kj2NL0aVfOSrsuU3Laagk-Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"token\": \"e59b16\",\n\t\"listo\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/personaje/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personaje",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Partida",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.j19e3iZBHunqXAwxdzvLA4AuCCrNOWRw2Q5DZw5PcbTtAAU7joT5QM0W0TORkn4Kj2NL0aVfOSrsuU3Laagk-Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/personaje/1?token=e59b16",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personaje",
+								"1"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "e59b16"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Iniciar Partida",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.j19e3iZBHunqXAwxdzvLA4AuCCrNOWRw2Q5DZw5PcbTtAAU7joT5QM0W0TORkn4Kj2NL0aVfOSrsuU3Laagk-Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/personaje/1/start/?token=e59b16",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personaje",
+								"1",
+								"start",
+								""
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "e59b16"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

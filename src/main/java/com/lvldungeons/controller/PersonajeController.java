@@ -62,7 +62,7 @@ public class PersonajeController {
 			//Si trae el campo Listo en el requestBody
 			} else if (datos.getListo() != null) {
 				
-					// Cambio el estado de la partida
+					// Cambio el estado del Personaje
 					response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
 							GenerateDTOService.generatePersonajeDTO(personajeService.setEstadoPersonaje(personaje, datos.getListo()))
 							);

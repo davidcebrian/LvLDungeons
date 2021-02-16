@@ -31,6 +31,12 @@ public class UserDTO {
 		this.username = username;
 		this.personaje = personaje;
 	}
+	
+	public UserDTO(String nombre, int edad) {
+		super();
+		this.nombre = nombre;
+		this.edad = edad;
+	}
 
 	public UserDTO() {
 		super();

@@ -21,6 +21,8 @@ public class CartaService {
 	private CartaRepository cartaRepo;
 	@Autowired
 	private EquipoRepository equipoRepo;
+	@Autowired
+	private GenerateDTOService generateDto;
 
 	// Get de todas las barajas
 	public List<Carta> getEntities() {
@@ -43,9 +45,9 @@ public class CartaService {
 		List<Equipo> equipos = new ArrayList<Equipo>();
 		sent.stream().forEach((c) -> {
 			if(c.getTipo() != TipoCarta.EQUIPO) {
-				cartas.add(GenerateDTOService.generateCartaDTO(c));
+				cartas.add(generateDto.generateCartaDTO(c));
 			}else {
-				equipos.add((Equipo) GenerateDTOService.generateCartaDTO(c));
+				equipos.add((Equipo) generateDto.generateCartaDTO(c));
 			}
 		});
 		cartaRepo.saveAll(cartas);

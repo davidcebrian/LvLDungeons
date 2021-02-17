@@ -21,7 +21,7 @@ public class GenerateDTOService {
 	/*
 	 * Generar UserDTO desde un User
 	 */
-	public static UserDTO generateUserDTO(User postUser) {
+	public  UserDTO generateUserDTO(User postUser) {
 		
 		Personaje pj = postUser.getPersonaje();
 		PersonajeDTO pjDTO = generatePersonajeDTO(pj);
@@ -37,7 +37,7 @@ public class GenerateDTOService {
 	/*
 	 * Generar PartidaDTO desde una Partida
 	 */
-	public static PartidaDTO generatePartidaDTO(Partida postPartida) {
+	public  PartidaDTO generatePartidaDTO(Partida postPartida) {
 		
 		List<Personaje> personajes = postPartida.getPersonajes();
 		
@@ -59,7 +59,7 @@ public class GenerateDTOService {
 	/*
 	 * Generar PersonajeDTO desde un Personaje
 	 */
-	public static PersonajeDTO generatePersonajeDTO(Personaje pj) {
+	public  PersonajeDTO generatePersonajeDTO(Personaje pj) {
 		PersonajeDTO personajeDTO = new PersonajeDTO(pj.getId(), pj.getVida(), pj.getDaño(), pj.getEnergia(), pj.getVivo(), pj.getEmpezarPartida());
 
 		return personajeDTO;
@@ -69,7 +69,7 @@ public class GenerateDTOService {
 	/*
 	 * Generar CartaDTO desde una carta
 	 */
-	public static Carta generateCartaDTO(CartaDTO cartaDTO) {
+	public  Carta generateCartaDTO(CartaDTO cartaDTO) {
 		if(cartaDTO.getTipoEquipo() != null) {
 			Equipo equipo = new Equipo(cartaDTO);
 			return equipo;

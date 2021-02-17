@@ -7,6 +7,7 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -34,7 +35,7 @@ public class Partida extends AbstractEntity {
 	/*
 	 * Persoajes que juegan esta partida.
 	 */
-    @OneToMany(mappedBy = "partida", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "partida", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Personaje> personajes;
 	
     /*
@@ -69,6 +70,7 @@ public class Partida extends AbstractEntity {
 	public Partida(Personaje personaje) {
 		super();
 		this.token = UUID.randomUUID().toString().substring(0, 6);
+		personaje.setEmpezarPartida(false);
 		this.personajes = new ArrayList<Personaje>() {{
 			add(personaje);
 		}};
@@ -100,6 +102,7 @@ public class Partida extends AbstractEntity {
 	}
 	
 	public void addPersonaje(Personaje personaje) {
+		personaje.setEmpezarPartida(false);
 		this.personajes.add(personaje);
 	}
 

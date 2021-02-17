@@ -18,7 +18,7 @@ import com.lvldungeons.model.entity.Personaje;
 import com.lvldungeons.model.entity.dto.DatosPersonajeDTO;
 import com.lvldungeons.service.GenerateDTOService;
 import com.lvldungeons.service.PersonajeService;
-import com.lvldungeons.service.Error.ManejoErrores;
+import com.lvldungeons.service.Error.Errores;
 
 @RestController
 @RequestMapping(path = "personaje")
@@ -26,9 +26,9 @@ public class PersonajeController {
 
 	@Autowired 
 	private PersonajeService personajeService; 
+	@Autowired
+	private GenerateDTOService generateDto;
 	
-	@Autowired 
-	private ManejoErrores errorService;
 	
 
 	/*
@@ -56,7 +56,7 @@ public class PersonajeController {
 				
 				//Ese personaje se une a la partida
 				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
-					GenerateDTOService.generatePartidaDTO(personajeService.unirsePartida(personaje, datos.getToken()))
+						generateDto.generatePartidaDTO(personajeService.unirsePartida(personaje, datos.getToken()))
 					);	
 		
 			//Si trae el campo Listo en el requestBody
@@ -64,17 +64,17 @@ public class PersonajeController {
 				
 					// Cambio el estado del Personaje
 					response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
-							GenerateDTOService.generatePersonajeDTO(personajeService.setEstadoPersonaje(personaje, datos.getListo()))
+							generateDto.generatePartidaDTO(personajeService.setEstadoPersonaje(personaje, datos.getListo()).getPartida())
 							);
 					
 			// Si no trae datos en el estado crea una nueva partida.
 			} else {
 				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
-						GenerateDTOService.generatePartidaDTO(personajeService.iniciarPartida(personaje))
+						generateDto.generatePartidaDTO(personajeService.iniciarPartida(personaje))
 						);
 			}	
 		} else {
-			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(errorService.generarError(4));
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(Errores.ERROR_CREAR_PARTIDA);
 		}
 		
 		return response;
@@ -94,10 +94,10 @@ public class PersonajeController {
 		
 		if (personaje != null) {
 			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
-					GenerateDTOService.generatePartidaDTO(personajeService.obtenerPartida(personaje, token))
+					generateDto.generatePartidaDTO(personajeService.obtenerPartida(personaje, token))
 			);
 		} else {
-			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(errorService.generarError(6));
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(Errores.ERROR_OBTENER_PARTIDA);
 		}
 		return response;
 	}
@@ -120,7 +120,7 @@ public class PersonajeController {
 				personajeService.empezarPartida(token)
 			);
 		} else {
-			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(errorService.generarError(6));
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(Errores.ERROR_INICIAR_PARTIDA);
 		}
 		
 		return response;

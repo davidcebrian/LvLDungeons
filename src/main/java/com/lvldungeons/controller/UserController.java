@@ -17,7 +17,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.lvldungeons.model.entity.User;
 import com.lvldungeons.service.GenerateDTOService;
 import com.lvldungeons.service.UserService;
-import com.lvldungeons.service.Error.ManejoErrores;
+import com.lvldungeons.service.Error.Errores;
+
 
 
 @RestController
@@ -26,9 +27,9 @@ public class UserController {
 
 	@Autowired 
 	private UserService userService; 
+	@Autowired
+	private GenerateDTOService generateDto;
 	
-	@Autowired 
-	private ManejoErrores errorService;
 
 	/**
 	 * Puede devolver un JSON con un error y un mensaje si el login no es correcto.
@@ -42,12 +43,12 @@ public class UserController {
 		ResponseEntity<?> response;
 		
 		if (username.equals("") || password.equals("")) {
-			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorService.generarError(1));
+			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Errores.PETICION_INCORRECTA);
 		
 		} else {
 			JsonNode jwt = userService.autenticaUsuario(username, password);
 			if (jwt == null) {			
-				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(errorService.generarError(3));	
+				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(Errores.USUARIO_PASS_INCORRECTA);	
 			} else {
 				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(jwt);	
 			}
@@ -66,14 +67,14 @@ public class UserController {
 		ResponseEntity<?> response;
 		
 		if (user.getUsername().isBlank() || user.getPassword().isBlank() || user.getEmail().isBlank()) {
-			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorService.generarError(1));			
+			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Errores.PETICION_INCORRECTA);			
 		} else {			
 			User postUser = userService.saveEntity(user);
 			if (postUser == null) {
-				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(errorService.generarError(2));
+				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(Errores.EXISTE_NICK_EMAIL);
 			} 
 			else {
-				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(GenerateDTOService.generateUserDTO(postUser));	
+				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(generateDto.generateUserDTO(postUser));	
 			}
 		}
 
@@ -92,9 +93,9 @@ public class UserController {
 		User user = userService.datosAutenticado(request, id);
 
 		if(request != null && user != null) {
-			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(GenerateDTOService.generateUserDTO(user));
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(generateDto.generateUserDTO(user));
 		}else {
-			ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorService.generarError(1));
+			ResponseEntity.status(HttpStatus.NOT_FOUND).body(Errores.PETICION_INCORRECTA);
 		}
 		return response;
 	}

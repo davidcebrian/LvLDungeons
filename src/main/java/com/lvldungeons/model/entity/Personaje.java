@@ -75,6 +75,10 @@ public class Personaje extends AbstractEntity {
 		return this.partida;
 	}
 	
+	public void setPartida(Partida partida) {
+		this.partida = partida;
+	}
+	
 	public Integer getVida() {
 		return vida;
 	}

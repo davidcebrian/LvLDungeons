@@ -51,7 +51,7 @@ public class GenerateDTOService {
 			pjDTO = generatePersonajeDTO(pj);
 			personajesDTO.add(pjDTO);
 		}	
-		PartidaDTO partidaDTO = new PartidaDTO(postPartida.getToken(), postPartida.getIniciada(), personajes.get(0).getId(), personajesDTO);
+		PartidaDTO partidaDTO = new PartidaDTO(postPartida.getToken(), postPartida.getIniciada(), postPartida.getOwner(), personajesDTO);
 		
 		return partidaDTO;
 	}
@@ -60,7 +60,7 @@ public class GenerateDTOService {
 	 * Generar PersonajeDTO desde un Personaje
 	 */
 	public  PersonajeDTO generatePersonajeDTO(Personaje pj) {
-		PersonajeDTO personajeDTO = new PersonajeDTO(pj.getId(), pj.getVida(), pj.getDaño(), pj.getEnergia(), pj.getVivo(), pj.getEmpezarPartida());
+		PersonajeDTO personajeDTO = new PersonajeDTO(pj.getUsuario().getUsername().toString(), pj.getId(), pj.getVida(), pj.getDaño(), pj.getEnergia(), pj.getVivo(), pj.getEmpezarPartida());
 
 		return personajeDTO;
 	}

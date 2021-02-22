@@ -57,6 +57,17 @@ public class PersonajeService {
 		
 		return partidaService.getPartidaByToken(token);
 	}
+	
+	//Salirse de una partida
+	public Partida salirPartida(Personaje personaje) {
+		Partida partida = personaje.getPartida();
+		partida.removePersonaje(personaje);
+		partida.setOwner(partida.getPersonajes().get(0).getId());
+		partidaService.savePartida(partida);
+		persoRepo.save(personaje);
+		return (partida != null) ? partida : null;
+		
+	}
 
 	// Get una partida
 	public Partida obtenerPartida(Personaje personaje, String token) {

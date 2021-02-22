@@ -107,6 +107,7 @@ public class Partida extends AbstractEntity {
 	}
 
 	public void removePersonaje(Personaje personaje) {
+		personaje.setPartida(null);
 		this.personajes.remove(personaje);
 	}
 

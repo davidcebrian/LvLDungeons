@@ -13,6 +13,7 @@ public enum Errores implements Serializable{
 	ERROR_CREAR_PARTIDA("No se ha podido crear la partida. ERROR 4"),
 	ERROR_OBTENER_PARTIDA("No se ha podido obtener la partida. ERROR 5"),
 	ERROR_INICIAR_PARTIDA("No se ha podido iniciar la partida. ERROR 6"),
+	ERROR_SALIR_PARTIDA("No has podido salir de la partida. ERROR 7"),
 	INDETERMINADO("Error indeterminado. ERROR 999999");
 	
 	

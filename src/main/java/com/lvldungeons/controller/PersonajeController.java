@@ -80,6 +80,26 @@ public class PersonajeController {
 		return response;
 	}
 	
+	@PutMapping("/{id}/exit")
+	public ResponseEntity<?> exitPartida(HttpServletRequest request, @PathVariable Long id){
+		ResponseEntity<?> response;
+		Personaje personaje;
+		
+		personaje = this.personajeService.getPersonajeFromRequest(request, id);
+		
+		// Si existe el personaje
+		if (personaje != null) {
+			
+				//Ese personaje se sale de la partida
+				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
+						generateDto.generatePartidaDTO(personajeService.salirPartida(personaje))
+					);	
+		}else {
+			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(Errores.ERROR_SALIR_PARTIDA);
+		}
+		return response;
+	}
+	
 
 	/*
 	 * GET de la partida de un personaje, necesitas el id del usuario y el token de la partida.

@@ -5,6 +5,7 @@ public class PersonajeDTO {
 	 * Enviar informacion filtrada de Personaje desde el Backend
 	 */
 	
+	private String username;
 	private Integer vida;
 	private Integer daño;
 	private Integer energia;
@@ -15,8 +16,9 @@ public class PersonajeDTO {
 	/*
 	 * Constructores
 	 */
-	public PersonajeDTO(Long id, Integer vida, Integer daño, Integer energia, Boolean vivo, Boolean empezarPartida) {
+	public PersonajeDTO(String username, Long id, Integer vida, Integer daño, Integer energia, Boolean vivo, Boolean empezarPartida) {
 		super();
+		this.username = username;
 		this.id = id;
 		this.vida = vida;
 		this.daño = daño;
@@ -28,9 +30,19 @@ public class PersonajeDTO {
 	/*
 	 * Getters y Setters
 	 */
+	
+	
 	public PersonajeDTO() {
 		super();
 	}
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public Long getId() {
 		return id;
 	}

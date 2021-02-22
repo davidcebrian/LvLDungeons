@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.lvldungeons.model.entity.User;
+import com.lvldungeons.model.entity.dto.UserDTO;
 import com.lvldungeons.model.repository.UserRepository;
 import com.lvldungeons.service.jwtSecurity.AuthJWT;
 
@@ -62,5 +63,29 @@ public class UserService {
 		return user;
 	}
 
+	
+	//Actualiza los datos de un usuario
+	public User updateUser(User user, UserDTO userDTO) {
+		
+		if(userDTO.getEmail() != user.getEmail() && userRepo.findByEmail(userDTO.getEmail()) != null) {
+			user = null;
+		}else if(userDTO.getUsername() != user.getUsername() && userRepo.findByEmail(userDTO.getEmail()) != null) {
+			user = null;
+		}else {
+			user.setNombre(userDTO.getNombre());
+			user.setEdad(userDTO.getEdad());
+			user.setEmail(userDTO.getEmail());
+			user.setUsername(userDTO.getUsername());
+			user.setPassword(userDTO.getPassword());
+			userRepo.save(user);
+		}	
+		return user;
+	}
+
+	
+	//Elimina al usuario
+	public void deleteUser(User user) {
+		userRepo.delete(user);		
+	}
 	
 }

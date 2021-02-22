@@ -10,18 +10,20 @@ public class UserDTO {
 	private Integer edad;
 	private String email;
 	private String username;
+	private String password;
 	
 	private PersonajeDTO personaje;
 
 	/*
 	 * Constructores
 	 */
-	public UserDTO(String nombre, Integer edad, String email, String username, PersonajeDTO personaje) {
+	public UserDTO(String nombre, Integer edad, String email, String username, PersonajeDTO personaje, String password) {
 		super();
 		this.nombre = nombre;
 		this.edad = edad;
 		this.email = email;
 		this.username = username;
+		this.password = password;
 		this.personaje = personaje;
 	}
 	
@@ -84,4 +86,14 @@ public class UserDTO {
 	public void setPersonaje(PersonajeDTO personaje) {
 		this.personaje = personaje;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 }

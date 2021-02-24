@@ -32,6 +32,7 @@ public class UserService {
 			User usuarioAutenticado = userRepo.findByUsernameAndPassword(username, password);
 			((ObjectNode) jwt).put("jwt", AuthJWT.generarJWTDesdeId(usuarioAutenticado));
 			((ObjectNode) jwt).put("id", usuarioAutenticado.getId());
+			((ObjectNode) jwt).put("pj_id", usuarioAutenticado.getPersonaje().getId());
 		} catch (Exception e) {
 			return null;
 		}

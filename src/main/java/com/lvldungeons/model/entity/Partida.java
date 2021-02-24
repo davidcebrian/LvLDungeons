@@ -94,7 +94,7 @@ public class Partida extends AbstractEntity {
 	}
 
 	public void setOwner(Long idOwner) {
-		idOwner = this.idOwner;
+		this.idOwner = idOwner;
 	}
 
 	public List<Personaje> getPersonajes() {

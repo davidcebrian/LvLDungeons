@@ -3,12 +3,15 @@ package com.lvldungeons.service;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.lvldungeons.model.entity.Partida;
 import com.lvldungeons.model.entity.Personaje;
 import com.lvldungeons.model.entity.User;
 import com.lvldungeons.model.repository.PersonajeRepository;
+import com.lvldungeons.service.Error.Errores;
 
 @Service
 public class PersonajeService {
@@ -49,21 +52,34 @@ public class PersonajeService {
 	public Partida unirsePartida(Personaje personaje, String token) {
 		
 		Partida partida = partidaService.getPartidaByToken(token);
-		partida.addPersonaje(personaje);
-		personaje.unirsePartida(partida);
+		if(partida != null ) {
+			partida.addPersonaje(personaje);
+			personaje.unirsePartida(partida);
+			
+			partidaService.savePartida(partida);
+			persoRepo.save(personaje);
+			return partidaService.getPartidaByToken(token);
+		}else {
+			return null;
+		}
 		
-		partidaService.savePartida(partida);
-		persoRepo.save(personaje);
 		
-		return partidaService.getPartidaByToken(token);
+		
 	}
 	
 	//Salirse de una partida
 	public Partida salirPartida(Personaje personaje) {
 		Partida partida = personaje.getPartida();
-		partida.removePersonaje(personaje);
-		partida.setOwner(partida.getPersonajes().get(0).getId());
-		partidaService.savePartida(partida);
+		if(partida.getPersonajes().size()==1) {
+			partida.removePersonaje(personaje);
+			partidaService.removePartida(partida);
+		}else {
+			partida.removePersonaje(personaje);
+			if(partida.getOwner() == personaje.getId()) {			
+				partida.setOwner(partida.getPersonajes().get(0).getId());
+			}
+			partidaService.savePartida(partida);
+		}
 		persoRepo.save(personaje);
 		return (partida != null) ? partida : null;
 		

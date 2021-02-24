@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lvldungeons.model.entity.Partida;
 import com.lvldungeons.model.entity.Personaje;
 import com.lvldungeons.model.entity.dto.DatosPersonajeDTO;
+import com.lvldungeons.model.entity.dto.PartidaDTO;
 import com.lvldungeons.service.GenerateDTOService;
 import com.lvldungeons.service.PersonajeService;
 import com.lvldungeons.service.Error.Errores;
@@ -53,12 +55,15 @@ public class PersonajeController {
 			
 			// Si el RequestBody trae el token, pero no trae el estado "Listo"
 			if (datos.getToken() != null && datos.getListo() == null) {
-				
-				//Ese personaje se une a la partida
-				response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
-						generateDto.generatePartidaDTO(personajeService.unirsePartida(personaje, datos.getToken()))
-					);	
-		
+				//Ese personaje se une a la partida si esta existe, si no lanza error.
+				Partida unirse = personajeService.unirsePartida(personaje, datos.getToken());
+				if(unirse != null) {					
+					PartidaDTO partidaRes = generateDto.generatePartidaDTO(unirse);
+					response = ResponseEntity.status(HttpStatus.ACCEPTED).body(partidaRes);				
+				}else {
+					response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(Errores.ERROR_PARTIDA_NOTFOUND);
+				}
+					
 			//Si trae el campo Listo en el requestBody
 			} else if (datos.getListo() != null) {
 				

@@ -1,7 +1,5 @@
 package com.lvldungeons.model.entity.carta;
 
-import java.sql.Blob;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,7 +21,7 @@ import com.lvldungeons.model.enumerate.TipoCarta;
 public class Carta extends AbstractEntity {
 
 	private String nombre;			
-	private Blob diseño;			// Imagen de la carta
+	private String diseño;			// Imagen de la carta
 	private String descripcion;		
 	private Integer valor;			// Valor puede tomar varias funciones, como stamina, daño, vida, etc...
 	
@@ -66,11 +64,11 @@ public class Carta extends AbstractEntity {
 		this.nombre = nombre;
 	}
 
-	public Blob getDiseño() {
+	public String getDiseño() {
 		return diseño;
 	}
 
-	public void setDiseño(Blob diseño) {
+	public void setDiseño(String diseño) {
 		this.diseño = diseño;
 	}
 

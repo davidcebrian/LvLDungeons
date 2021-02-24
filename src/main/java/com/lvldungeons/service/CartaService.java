@@ -29,7 +29,7 @@ public class CartaService {
 		return (List<Carta>) cartaRepo.findAll();
 	}
 
-	// Get de una baraja por id
+	// Get de una carta por id
 	public Carta getEntityById(Long id) {
 		return cartaRepo.findById(id).get();
 	}
@@ -67,7 +67,7 @@ public class CartaService {
 		return us;
 	}
 
-	// Borrar un user
+	// Borrar una carta
 	public void deleteEntity(Long id) {
 		cartaRepo.deleteById(id);
 	}

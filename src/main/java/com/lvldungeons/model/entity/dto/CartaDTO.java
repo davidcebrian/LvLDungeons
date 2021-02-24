@@ -1,7 +1,5 @@
 package com.lvldungeons.model.entity.dto;
 
-import java.sql.Blob;
-
 import com.lvldungeons.model.enumerate.TipoCarta;
 import com.lvldungeons.model.enumerate.TipoEquipo;
 
@@ -11,7 +9,7 @@ public class CartaDTO {
 	 */
 	
 	private String nombre;
-	private Blob diseño;
+	private String diseño;
 	private String descripcion;
 	private Integer valor;
 	private TipoCarta tipo;
@@ -37,11 +35,11 @@ public class CartaDTO {
 		this.nombre = nombre;
 	}
 
-	public Blob getDiseño() {
+	public String getDiseño() {
 		return diseño;
 	}
 
-	public void setDiseño(Blob diseño) {
+	public void setDiseño(String diseño) {
 		this.diseño = diseño;
 	}
 

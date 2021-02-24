@@ -13,7 +13,6 @@
 	<artifactId>LvLDungeons</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>LvLDungeons</name>
-	<packaging>war</packaging>
 	<description>Proyecto para realizar las pruebas de conexion a la API REST.</description>
 
 	<properties>

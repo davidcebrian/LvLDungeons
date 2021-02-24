@@ -27,13 +27,13 @@
 			<!-- DESPLIEGUE 
 			
 			
-			-->
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-started-tomcat</artifactId>
 				</exclusion>
 			</exclusions>
+			-->
 		</dependency>
 
 		<dependency>

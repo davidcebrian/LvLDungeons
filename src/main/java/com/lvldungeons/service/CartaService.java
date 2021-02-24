@@ -24,6 +24,7 @@ public class CartaService {
 	@Autowired
 	private GenerateDTOService generateDto;
 
+	
 	// Get de todas las barajas
 	public List<Carta> getEntities() {
 		return (List<Carta>) cartaRepo.findAll();

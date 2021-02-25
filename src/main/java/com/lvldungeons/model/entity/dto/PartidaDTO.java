@@ -5,8 +5,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.lvldungeons.model.entity.Personaje;
+import com.lvldungeons.model.entity.carta.Carta;
 
+@JsonInclude(Include.NON_NULL)
 public class PartidaDTO {
 	/*
 	 * Enviar informacion filtrada de la partida desde el backend
@@ -16,6 +20,7 @@ public class PartidaDTO {
 	private List<PersonajeDTO> personajes;
 	private Boolean iniciada;
 	private Long idOwner;
+	
 	
 	/*
 	 * Constructores

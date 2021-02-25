@@ -142,7 +142,7 @@ public class PersonajeController {
 		
 		if (personaje != null) {	
 			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(
-				personajeService.empezarPartida(token)
+					generateDto.generatePartidaDTO(personajeService.empezarPartida(token))
 			);
 		} else {
 			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(Errores.ERROR_INICIAR_PARTIDA);

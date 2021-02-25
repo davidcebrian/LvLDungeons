@@ -95,16 +95,17 @@ public class PersonajeService {
 
 	
 	// Empezar la partida cuando todos los jugadores esten listos
-	public Boolean empezarPartida(String token) {
+	public Partida empezarPartida(String token) {
 		Partida partida = partidaService.getPartidaByToken(token);
 		boolean empezar = true;
 		
 		partida.getPersonajes().stream().allMatch(pj -> pj.getEmpezarPartida());
 		
-		// Aqui debemos hacer algo cuando empieza la partida, pero por ahora
-		// Solo devolvera un boolean.
+		// CArga las barajas en la partida que estemos y reparte cartas aleatorias a los jugadores.
+		partidaService.cargarBarajas(token);
+		partida = partidaService.repartir(token);
 		
-		return empezar;
+		return partida;
 	}
 
 	//Cambiar estado del personaje.

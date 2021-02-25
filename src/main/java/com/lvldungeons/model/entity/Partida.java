@@ -6,17 +6,13 @@ import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
-import com.lvldungeons.model.entity.baraja.Descarte;
-import com.lvldungeons.model.entity.baraja.MonstruoFinal;
-import com.lvldungeons.model.entity.baraja.Puerta;
-import com.lvldungeons.model.entity.baraja.Tesoro;
 import com.lvldungeons.model.entity.base.AbstractEntity;
+import com.lvldungeons.model.entity.carta.Carta;
 
 @SuppressWarnings("serial")
 @Entity
@@ -41,24 +37,18 @@ public class Partida extends AbstractEntity {
     /*
      * Todas las barajas necesarias
      */
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "descarte_id", referencedColumnName = "id")
-	private Descarte descarte;
+  
+    @ElementCollection()
+	private List<Carta> descarte;
     
+    @ElementCollection()
+    private List<Carta> monstruoFinal;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "monstruo_final_id", referencedColumnName = "id")
-    private MonstruoFinal monstruoFinal;
+    @ElementCollection()
+    private List<Carta> puerta;
     
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "puerta_id", referencedColumnName = "id")
-    private Puerta puerta;
-    
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tesoro_id", referencedColumnName = "id")
-    private Tesoro tesoro;
+    @ElementCollection()
+    private List<Carta> tesoro;
     
     public Partida() {
     	super();
@@ -111,12 +101,37 @@ public class Partida extends AbstractEntity {
 		this.personajes.remove(personaje);
 	}
 
-	public Descarte getDescarte() {
+	public List<Carta> getDescarte() {
 		return descarte;
 	}
 
-	public void setDescarte(Descarte descarte) {
+	public void setDescarte(List<Carta> descarte) {
 		this.descarte = descarte;
 	}
+
+	public List<Carta> getMonstruoFinal() {
+		return monstruoFinal;
+	}
+
+	public void setMonstruoFinal(List<Carta> monstruoFinal) {
+		this.monstruoFinal = monstruoFinal;
+	}
+
+	public List<Carta> getPuerta() {
+		return puerta;
+	}
+
+	public void setPuerta(List<Carta> puerta) {
+		this.puerta = puerta;
+	}
+
+	public List<Carta> getTesoro() {
+		return tesoro;
+	}
+
+	public void setTesoro(List<Carta> tesoro) {
+		this.tesoro = tesoro;
+	}
+
 
 }

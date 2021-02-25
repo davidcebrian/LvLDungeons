@@ -41,16 +41,20 @@ public class GenerateDTOService {
 		
 		List<Personaje> personajes = postPartida.getPersonajes();
 		
-		List<PersonajeDTO> personajesDTO = new ArrayList<PersonajeDTO>(); 
+		List<PersonajeDTO> personajesDTO = new ArrayList<>(); 
 		
-		PersonajeDTO pjDTO;
-		Personaje pj;
+//		PersonajeDTO pjDTO;
+//		Personaje pj;
 		
-		for (int i=0; i<personajes.size(); i++) {
-			pj = personajes.get(i);
-			pjDTO = generatePersonajeDTO(pj);
-			personajesDTO.add(pjDTO);
-		}	
+		personajes.stream().forEach(personaje -> {
+			personajesDTO.add(generatePersonajeDTO(personaje));
+		});
+		
+//		for (int i=0; i<personajes.size(); i++) {
+//			pj = personajes.get(i);
+//			pjDTO = generatePersonajeDTO(pj);
+//			personajesDTO.add(pjDTO);
+//		}	
 		PartidaDTO partidaDTO = new PartidaDTO(postPartida.getToken(), postPartida.getIniciada(), postPartida.getOwner(), personajesDTO);
 		
 		return partidaDTO;
@@ -60,8 +64,17 @@ public class GenerateDTOService {
 	 * Generar PersonajeDTO desde un Personaje
 	 */
 	public  PersonajeDTO generatePersonajeDTO(Personaje pj) {
-		PersonajeDTO personajeDTO = new PersonajeDTO(pj.getUsuario().getUsername().toString(), pj.getId(), pj.getVida(), pj.getDaño(), pj.getEnergia(), pj.getVivo(), pj.getEmpezarPartida());
-
+		PersonajeDTO personajeDTO = new PersonajeDTO();
+		personajeDTO.setDaño(pj.getDaño());
+		personajeDTO.setEmpezarPartida(pj.getEmpezarPartida());
+		personajeDTO.setEnergia(pj.getEnergia());
+		personajeDTO.setEquipo(pj.getEquipo());
+		personajeDTO.setId(pj.getId());
+		personajeDTO.setMano(pj.getMano());
+		personajeDTO.setUsername(pj.getUsuario().getUsername());
+		personajeDTO.setVida(pj.getVida());
+		personajeDTO.setVivo(pj.getVivo());
+		
 		return personajeDTO;
 	}
 	

@@ -30,9 +30,7 @@ public class Baraja extends AbstractEntity {
 	private String nombre;
 	private String descripcion;
 	
-    @OneToMany(mappedBy = "baraja", cascade=CascadeType.ALL)
-    @JsonIgnore
-	private List<Carta> cartas = new ArrayList<Carta> ();
+
 	
     
     /*
@@ -65,16 +63,5 @@ public class Baraja extends AbstractEntity {
 		return MIN_CARTAS;
 	}
 
-	public List<Carta> getCartas() {
-		return cartas;
-	}
-
-	public void setCartas(List<Carta> cartas) {
-		this.cartas = cartas;
-	}
-	
-	public void addCartas(Carta carta) {
-		this.cartas.add(carta);
-	}
 	
 }

@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.lvldungeons.model.entity.Personaje;
-import com.lvldungeons.model.entity.baraja.Baraja;
 import com.lvldungeons.model.entity.base.AbstractEntity;
 import com.lvldungeons.model.entity.dto.CartaDTO;
 import com.lvldungeons.model.enumerate.TipoCarta;
@@ -31,10 +30,6 @@ public class Carta extends AbstractEntity {
 	@ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "personaje_id")
 	private Personaje personaje;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "baraja_id")
-	private Baraja baraja;	
 
 	
 	/*
@@ -94,14 +89,6 @@ public class Carta extends AbstractEntity {
 
 	public void setTipo(TipoCarta tipo) {
 		this.tipo = tipo;
-	}
-
-	public Baraja getBaraja() {
-		return baraja;
-	}
-
-	public void setBaraja(Baraja baraja) {
-		this.baraja = baraja;
 	}
 
 	public Personaje getPersonaje() {

@@ -13,6 +13,7 @@ import com.lvldungeons.model.entity.base.AbstractEntity;
 
 @SuppressWarnings("serial")
 @Entity
+@Table(name = "userlvl")
 public class User extends AbstractEntity {
 	/*
 	 * Entidad que controla tus datos personales y el inicio de sesion. 

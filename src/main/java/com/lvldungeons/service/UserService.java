@@ -66,20 +66,20 @@ public class UserService {
 
 	
 	//Actualiza los datos de un usuario
-	public User updateUser(User user, UserDTO userDTO) {
+	public User updateUser(User user, User sentUser) {
 		
-		if(userDTO.getEmail() != user.getEmail() && userRepo.findByEmail(userDTO.getEmail()) != null) {
-			user = null;
-		}else if(userDTO.getUsername() != user.getUsername() && userRepo.findByEmail(userDTO.getEmail()) != null) {
-			user = null;
-		}else {
-			user.setNombre(userDTO.getNombre());
-			user.setEdad(userDTO.getEdad());
-			user.setEmail(userDTO.getEmail());
-			user.setUsername(userDTO.getUsername());
-			user.setPassword(userDTO.getPassword());
+//		if(userRepo.findByEmail(sentUser.getEmail()) != null) {
+//			user = null;
+//		}else if(userRepo.findByUsername(sentUser.getUsername()) != null) {
+//			user = null;
+//		}else {		
+			user.setNombre(sentUser.getNombre());
+			user.setEdad(sentUser.getEdad());
+			user.setEmail(sentUser.getEmail());
+			user.setUsername(sentUser.getUsername());
+			user.setPassword(sentUser.getPassword());
 			userRepo.save(user);
-		}	
+//		}
 		return user;
 	}
 

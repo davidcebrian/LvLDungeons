@@ -109,15 +109,15 @@ public class UserController {
 	 * Una vez logado el usuario le permite modificar sus datos
 	 * 
 	 * @param user User
-	 * @return User
+	 * @return UserDTO
 	 */
 	@PutMapping("/update/{id}")
-	public ResponseEntity<?> updateUser(HttpServletRequest request, @PathVariable long id, @RequestBody UserDTO userDTO){
+	public ResponseEntity<?> updateUser(HttpServletRequest request, @PathVariable long id, @RequestBody User sentUser){
 		ResponseEntity<?> response = null;
 		User user = userService.datosAutenticado(request, id);
-		userService.updateUser(user, userDTO);
+		User usermodificado = userService.updateUser(user, sentUser);
 		
-		if(user != null) {
+		if(usermodificado != null) {
 			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(generateDto.generateUserDTO(user));
 		}else {
 			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(Errores.EXISTE_NICK_EMAIL);
@@ -130,7 +130,7 @@ public class UserController {
 	 * Una vez logado el usuario le permite borrar su propia cuenta
 	 * 
 	 * @param User
-	 * 
+	 * @return UserDTO
 	 */
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delelteUser(HttpServletRequest request, @PathVariable long id){
@@ -138,8 +138,8 @@ public class UserController {
 		User user = userService.datosAutenticado(request, id);
 		
 		if(user != null) {
-			userService.deleteUser(user);
 			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(generateDto.generateUserDTO(user));
+			userService.deleteUser(user);
 		}else {
 			response = ResponseEntity.status(HttpStatus.ACCEPTED).body(Errores.INDETERMINADO); 
 		}
